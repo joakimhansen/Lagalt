@@ -17,6 +17,7 @@ VALUES ('Project A', 'Short description A', 'Full description A', '1', '1')
 ,('Project B', 'Short description B', 'Full description B', '2', '2')
 ,('Project C', 'Short description C', 'Full description C', '3', '3')
 ,('Project D', 'Short description D', 'Full description D', '4', '4')
+,('Project E', 'Short description E', 'Full description E', '1', '2')
 
 INSERT INTO [Skill]
 VALUES ('Backend')
@@ -36,15 +37,3 @@ VALUES ('1', '1')
 ,('4', '1')
 ,('4', '2')
 ,('4', '3')
-
-INSERT INTO [UserProjectLink]
-VALUES ('1', '1')
-,('1', '2')
-,('2', '1')
-,('2', '2')
-,('3', '1')
-,('3', '2')
-,('3', '3')
-,('3', '4')
-,('4', '3')
-,('4', '4')

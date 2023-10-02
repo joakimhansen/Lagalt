@@ -37,12 +37,6 @@ CREATE TABLE [Skill](
 
 USE [LagaltDb]
 
-CREATE TABLE [UserProjectLink](
-[User_Id] int FOREIGN KEY REFERENCES [User]([Id]),
-[Project_Id] int FOREIGN KEY REFERENCES [Project]([Id]),
-CONSTRAINT [UserProjectLink_Primary_Key] PRIMARY KEY([User_Id], [Project_Id])
-);
-
 CREATE TABLE [UserSkillLink](
 [User_Id] int FOREIGN KEY REFERENCES [User]([Id]),
 [Skill_Id] int FOREIGN KEY REFERENCES [Skill]([Id]),

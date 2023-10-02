@@ -1,8 +1,9 @@
-using Lagalt_backend.Models;
+using Lagalt_backend.Data.Models;
 using Lagalt_backend.Services.Users;
 using Microsoft.EntityFrameworkCore;
 
-namespace Lagalt_backend {
+namespace Lagalt_backend
+{
     public class Program {
         public static void Main(string[] args) {
             var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,8 @@ namespace Lagalt_backend {
             builder.Services.AddDbContext<LagaltDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("LagaltTestDb")));
 
             builder.Services.AddScoped<UserService, UserService>();
+
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
