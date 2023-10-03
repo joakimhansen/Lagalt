@@ -11,7 +11,7 @@ const StyledProjectList = styled.div`
   gap: 20px;
 `;
 
-const projects = [
+const tests = [
   {
     title: "Prosjekt 1",
     description:
@@ -46,10 +46,12 @@ const projects = [
   },
 ];
 
-const ProjectList = () => {
+//TODO: the projectlist shall iterate over the array of projects provided by the props from HomePage
+//Open console to look at the "projectsToDisplay" array
+const ProjectList = (projects) => {
   return (
     <StyledProjectList>
-      {projects.map((p) => {
+      {tests.map((p) => {
         return (
           <ProjectListItem
             title={p.title}
