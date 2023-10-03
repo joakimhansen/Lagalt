@@ -2,7 +2,7 @@
 
 namespace Lagalt_backend.Services.Projects
 {
-    public class SkillService : IProjectService
+    public class ProjectService : IProjectService
     {
         public Task<Project> AddAsync(Project obj)
         {
