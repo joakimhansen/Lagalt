@@ -6,6 +6,7 @@ import HomePage from "./pages/HomePage.tsx";
 import LoginPage from "./pages/LoginPage.tsx";
 import ProfilePage from "./pages/ProfilePage.tsx";
 import './index.css';
+import Navbar from './components/Navbar.tsx';
 
 
 const router = createBrowserRouter([
@@ -30,7 +31,9 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
+      <Navbar> </Navbar>
       <RouterProvider router={router}/>
+     
     </React.StrictMode>
 );
 
