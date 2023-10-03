@@ -11,6 +11,9 @@ namespace Lagalt_backend.Mappers
             CreateMap<Skill, SkillDTO>()
                 .ForMember(skillDto => skillDto.UserIds, options => options
                     .MapFrom(skill => skill.Users.Select(user => user.Id)));
+
+            CreateMap<SkillPostDTO, Skill>();
+            CreateMap<SkillPutDTO, Skill>();
         }
     }
 }
