@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Lagalt_backend.Controllers
 {
-    [Route("api/v1/Characters")]
+    [Route("api/v1/Users")]
     [ApiController]
     public class UserController : ControllerBase
     {
