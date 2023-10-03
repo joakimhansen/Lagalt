@@ -1,39 +1,65 @@
 import React from "react";
 import styled from "styled-components";
+import ProjectListItem from "./ProjectListItem.tsx";
 
-const ProjectListItem = styled.div`
-    padding: 20px;
-    border-radius: 20px;
-    background-color: #28113e;
-    width: 50%;
-`;
-
-const Wrapper = styled.div`
-    width: 100%;
-    display:flex;
-    margin-left: 20px;
-    margin-top: 20px;
+const StyledProjectList = styled.div`
+  width: 50%;
+  display: flex;
+  margin-left: 20px;
+  margin-top: 20px;
+  flex-direction: column;
+  gap: 20px;
 `;
 
-const Title = styled.div`
-    font-weight: bold;
-    margin: 10px 0;
-`;
-const Description = styled.div`
-    color: #d7c1ee;
-    margin-bottom: 10px;
-    line-height: 1.3;
-`;
+const projects = [
+  {
+    title: "Prosjekt 1",
+    description:
+      "Prosjektbeskrivelse: Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus et tempore ex perspiciatis natus aperiam atque, facere rerum architecto reiciendis!",
+    owner: "Silje",
+    id: 1,
+    image: "https://randomuser.me/api/portraits/women/58.jpg",
+  },
+  {
+    title: "Prosjekt 2",
+    description:
+      "Prosjektbeskrivelse: Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus et tempore ex perspiciatis natus aperiam atque, facere rerum architecto reiciendis!",
+    owner: "Joakim",
+    id: 2,
+    image: "https://randomuser.me/api/portraits/men/30.jpg",
+  },
+  {
+    title: "Prosjekt 3",
+    description:
+      "Prosjektbeskrivelse: Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus et tempore ex perspiciatis natus aperiam atque, facere rerum architecto reiciendis!",
+    owner: "Magnus",
+    id: 3,
+    image: "https://randomuser.me/api/portraits/men/73.jpg",
+  },
+  {
+    title: "Prosjekt 4",
+    description:
+      "Prosjektbeskrivelse: Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus et tempore ex perspiciatis natus aperiam atque, facere rerum architecto reiciendis!",
+    owner: "Silje D",
+    id: 4,
+    image: "https://randomuser.me/api/portraits/women/44.jpg",
+  },
+];
 
 const ProjectList = () => {
-    return(
-        <Wrapper>
-            <ProjectListItem>
-                <Title>Prosjektnavn</Title>
-                <Description>Prosjektbeskrivelse: Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus et tempore ex perspiciatis natus aperiam atque, facere rerum architecto reiciendis!</Description>
-                <div>Link?</div>
-            </ProjectListItem>
-        </Wrapper>
-    );
-}
+  return (
+    <StyledProjectList>
+      {projects.map((p) => {
+        return (
+          <ProjectListItem
+            title={p.title}
+            description={p.description}
+            owner={p.owner}
+            image={p.image}
+          />
+        );
+      })}
+    </StyledProjectList>
+  );
+};
 export default ProjectList;
