@@ -46,20 +46,20 @@ const tests = [
   },
 ];
 
-//TODO: the projectlist shall iterate over the array of projects provided by the props from HomePage
-//Open console to look at the "projectsToDisplay" array
 const ProjectList = (projects) => {
   return (
     <StyledProjectList>
-      {tests.map((p) => {
-        return (
-          <ProjectListItem
-            title={p.title}
-            description={p.description}
-            owner={p.owner}
-            image={p.image}
-          />
-        );
+      {projects.projects.map((p) => {
+        if (p.title && p.description && p.owner) {
+          return (
+            <ProjectListItem
+              title={p.title}
+              description={p.description}
+              owner={p.owner}
+              image={p.image}
+            />
+          );
+        }
       })}
     </StyledProjectList>
   );

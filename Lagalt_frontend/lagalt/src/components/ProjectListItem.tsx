@@ -21,14 +21,14 @@ const Image = styled.img`
     height: 40px;
     border-radius: 100%;
 `;
-const OwnerWrapper = styled.div`
+const Owner = styled.div`
     display: flex;
     align-items: center;
     gap: 10px;
     width: 110px;
     margin-top: 20px;
 `;
-const Div = styled.div`
+const Wrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -53,13 +53,13 @@ const ProjectListItem = ({title, description, owner, image}) => {
             <Title>{title}</Title>
             <Description>{description}</Description>
          
-            <Div>
-            <OwnerWrapper>
+            <Wrapper>
+            <Owner>
                 <Image src={image} alt={`Picture of ${owner}`}/>
                 {owner}
-            </OwnerWrapper>
+            </Owner>
                 <Button>Gå til prosjekt</Button>
-            </Div>
+            </Wrapper>
            
         </StyledProjectListItem>
     );
