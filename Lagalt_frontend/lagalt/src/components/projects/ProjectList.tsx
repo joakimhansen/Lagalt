@@ -57,6 +57,7 @@ const ProjectList = (projects) => {
               description={p.description}
               owner={p.owner}
               image={p.image}
+              id={p.id}
             />
           );
         }

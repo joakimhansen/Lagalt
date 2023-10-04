@@ -7,6 +7,7 @@ import LoginPage from "./pages/LoginPage.tsx";
 import ProfilePage from "./pages/ProfilePage.tsx";
 import './index.css';
 import Navbar from './components/common/Navbar.tsx';
+import ProjectDetail from './pages/ProjectDetail.tsx';
 
 
 export default function App(){
@@ -17,7 +18,8 @@ export default function App(){
         <Route path="/" element={<HomePage/>}/>
         <Route path="/home" element={<HomePage/>}/>
         <Route path="/login" element={<LoginPage/>}/>
-        <Route path="profile" element={<ProfilePage/>}/>
+        <Route path="/profile" element={<ProfilePage/>}/>
+        <Route path="/projectDetails/:id" element={<ProjectDetail/>}/>
       </Routes>
     </BrowserRouter>
   );

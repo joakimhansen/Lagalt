@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Title = styled.div`
@@ -47,7 +48,10 @@ const Button = styled.button`
 `;
 
 
-const ProjectListItem = ({title, description, owner, image}) => {
+const ProjectListItem = ({title, description, owner, image, id}) => {
+
+    const navigate = useNavigate();
+
     return(
         <StyledProjectListItem>
             <Title>{title}</Title>
@@ -58,10 +62,11 @@ const ProjectListItem = ({title, description, owner, image}) => {
                 <Image src={image} alt={`Picture of ${owner}`}/>
                 {owner}
             </Owner>
-                <Button>Gå til prosjekt</Button>
+                <Button onClick={() => navigate(`/projectDetails/${id}`)}>Se mer</Button>
             </Wrapper>
            
         </StyledProjectListItem>
     );
 }
+
 export default ProjectListItem;
