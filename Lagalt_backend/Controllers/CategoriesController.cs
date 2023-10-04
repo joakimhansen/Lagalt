@@ -21,10 +21,10 @@ namespace Lagalt_backend.Controllers {
     [ApiConventionType(typeof(DefaultApiConventions))]
     public class CategoriesController : ControllerBase {
 
-        private readonly CategoryService _service;
+        private readonly ICategoryService _service;
         private readonly IMapper _mapper;
 
-        public CategoriesController(CategoryService categoryService, IMapper mapper) {
+        public CategoriesController(ICategoryService categoryService, IMapper mapper) {
             _service = categoryService;
             _mapper = mapper;
         }
