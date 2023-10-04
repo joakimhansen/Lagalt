@@ -1,32 +1,64 @@
-﻿using Lagalt_backend.Data.Models.Entities;
+﻿using Lagalt_backend.Data.Exceptions;
+using Lagalt_backend.Data.Models;
+using Lagalt_backend.Data.Models.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Lagalt_backend.Services.Skills
 {
     public class SkillService : ISkillService
     {
-        public Task<Skill> AddAsync(Skill obj)
+        private readonly LagaltDbContext _context;
+        public SkillService(LagaltDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task DeleteByIdAsync(int id)
+        public async Task<ICollection<Skill>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            List<Skill> skills = await _context.Skills
+                                       .Include(skill => skill.Users)
+                                       .ToListAsync();
+            return skills;
         }
 
-        public Task<ICollection<Skill>> GetAllAsync()
+        public async Task<Skill> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            if (!await _context.Skills.AnyAsync(skill => skill.Id == id))
+                throw new EntityNotFoundException(nameof(Skill), id);
+
+            return await _context.Skills
+                            .Where(skill => skill.Id == id)
+                            .FirstAsync();
         }
 
-        public Task<Skill> GetByIdAsync(int id)
+        public async Task<Skill> AddAsync(Skill skill)
         {
-            throw new NotImplementedException();
+            await _context.Skills.AddAsync(skill);
+            await _context.SaveChangesAsync();
+
+            return skill;
         }
 
-        public Task<Skill> UpdateAsync(Skill obj)
+        public async Task<Skill> UpdateAsync(Skill updatedSkill)
         {
-            throw new NotImplementedException();
+            if (!await _context.Skills.AnyAsync(skill => skill.Id == updatedSkill.Id))
+                throw new EntityNotFoundException(nameof(Skill), updatedSkill.Id);
+
+            _context.Entry(updatedSkill).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return updatedSkill;
+        }
+
+        public async Task DeleteByIdAsync(int id)
+        {
+            //Throws EntityNotFoundException if it dowsn't exist
+            var SkillToDelete = await GetByIdAsync(id);
+
+            SkillToDelete.Users.Clear();
+
+            _context.Skills.Remove(SkillToDelete);
+            await _context.SaveChangesAsync();
         }
     }
 }

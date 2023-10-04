@@ -49,7 +49,10 @@ namespace Lagalt_backend.Services.Users
         {
             //Throws EntityNotFoundException if it doesn't exist
             var UserToDelete = await GetByIdAsync(id);
-
+            
+            UserToDelete.Skills.Clear();
+            UserToDelete.Projects.Clear();
+            
             _context.Users.Remove(UserToDelete);
             await _context.SaveChangesAsync();
         }

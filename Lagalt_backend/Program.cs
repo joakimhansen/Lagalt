@@ -1,6 +1,7 @@
 using Lagalt_backend.Data.Models;
 using Lagalt_backend.Services.Categories;
 using Lagalt_backend.Services.Projects;
+using Lagalt_backend.Services.Skills;
 using Lagalt_backend.Services.Users;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,9 +16,10 @@ namespace Lagalt_backend {
             builder.Services.AddDbContext<LagaltDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("LagaltTestDb")));
 
             // Register services
-            builder.Services.AddScoped<UserService, UserService>();
-            builder.Services.AddScoped<ProjectService, ProjectService>();
-            builder.Services.AddScoped<CategoryService, CategoryService>();
+            builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<ISkillService, SkillService>();
+            builder.Services.AddScoped<IProjectService, ProjectService>();
+            builder.Services.AddScoped<ICategoryService, CategoryService>();
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

@@ -1,77 +1,75 @@
 ﻿using AutoMapper;
-using Lagalt_backend.Data.DTOs.User;
+using Lagalt_backend.Data.DTOs.Skills;
 using Lagalt_backend.Data.Exceptions;
 using Lagalt_backend.Data.Models.Entities;
-using Lagalt_backend.Services.Users;
+using Lagalt_backend.Services.Skills;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lagalt_backend.Controllers
 {
-    [Route("api/v1/Users")]
+
+    [Route("api/v1/Skills")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class SkillController : ControllerBase
     {
-       
-        private readonly IUserService _service;
+        private readonly ISkillService _service;
         private readonly IMapper _mapper;
 
-        public UserController(IUserService service, IMapper mapper)
+        public SkillController(ISkillService service, IMapper mapper)
         {
             _service = service;
             _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserDTO>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<SkillDTO>>> GetSkills()
         {
-            return Ok(_mapper.Map<IEnumerable<UserDTO>>(await _service.GetAllAsync()));
+            return Ok(_mapper.Map<IEnumerable<SkillDTO>>(await _service.GetAllAsync()));
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserDTO>> GetUser(int id)
+        public async Task<ActionResult<SkillDTO>> GetSkill(int id)
         {
             try
             {
-                return Ok(_mapper.Map<UserDTO>(await _service.GetByIdAsync(id)));
+                return Ok(_mapper.Map<SkillDTO>(await _service.GetByIdAsync(id)));
             }
-            catch (EntityNotFoundException ex) 
+            catch (EntityNotFoundException ex)
             {
                 return NotFound(ex.Message);
             }
         }
 
         [HttpPost]
-        public async Task<ActionResult<UserDTO>> PostUser(UserPostDTO User)
+        public async Task<ActionResult<SkillDTO>> PostSkill(SkillPostDTO skill)
         {
-            var newUser = await _service.AddAsync(_mapper.Map<User>(User));
-
-            return CreatedAtAction("GetUser",
-                new { id = newUser.Id },
-                _mapper.Map<UserDTO>(newUser));
+            var newSkill = await _service.AddAsync(_mapper.Map<Skill>(skill));
+            return CreatedAtAction("GetSkill",
+                new { id = newSkill.Id },
+                _mapper.Map<SkillDTO>(newSkill));
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, UserPutDTO User)
+        public async Task<IActionResult> PutSkill(int id, SkillPutDTO skill)
         {
-            if (id != User.Id)
+            if (id != skill.Id)
             {
                 return BadRequest();
             }
 
             try
             {
-                await _service.UpdateAsync(_mapper.Map<User>(User));
+                await _service.UpdateAsync(_mapper.Map<Skill>(skill));
             }
             catch (EntityNotFoundException ex)
             {
                 return NotFound(ex.Message);
             }
-
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
+        public async Task<IActionResult> DeleteSkill(int id)
         {
             try
             {
