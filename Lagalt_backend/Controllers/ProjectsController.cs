@@ -20,10 +20,10 @@ namespace Lagalt_backend.Controllers {
     [ApiConventionType(typeof(DefaultApiConventions))]
     public class ProjectsController : ControllerBase {
 
-        private readonly ProjectService _service;
+        private readonly IProjectService _service;
         private readonly IMapper _mapper;
 
-        public ProjectsController(ProjectService projectService, IMapper mapper) {
+        public ProjectsController(IProjectService projectService, IMapper mapper) {
             _service = projectService;
             _mapper = mapper;
         }
