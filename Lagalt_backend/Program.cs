@@ -17,6 +17,7 @@ namespace Lagalt_backend {
             // Register services
             builder.Services.AddScoped<UserService, UserService>();
             builder.Services.AddScoped<ProjectService, ProjectService>();
+            builder.Services.AddScoped<CategoryService, CategoryService>();
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
