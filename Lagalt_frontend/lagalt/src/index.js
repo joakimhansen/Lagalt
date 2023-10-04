@@ -6,7 +6,7 @@ import HomePage from "./pages/HomePage.tsx";
 import LoginPage from "./pages/LoginPage.tsx";
 import ProfilePage from "./pages/ProfilePage.tsx";
 import './index.css';
-import Navbar from './components/Navbar.tsx';
+import Navbar from './components/common/Navbar.tsx';
 
 
 export default function App(){
