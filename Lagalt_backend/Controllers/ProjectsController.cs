@@ -14,7 +14,7 @@ using Lagalt_backend.Data.Exceptions;
 using System.Net.Mime;
 
 namespace Lagalt_backend.Controllers {
-    [Route("api/projects")]
+    [Route("api/v1/projects")]
     [ApiController]
     [Produces(MediaTypeNames.Application.Json)]
     [ApiConventionType(typeof(DefaultApiConventions))]

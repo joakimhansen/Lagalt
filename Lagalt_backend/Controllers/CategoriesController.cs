@@ -15,7 +15,7 @@ using Lagalt_backend.Data.Exceptions;
 using Lagalt_backend.Data.DTOs.Projects;
 
 namespace Lagalt_backend.Controllers {
-    [Route("api/categories")]
+    [Route("api/v1/categories")]
     [ApiController]
     [Produces(MediaTypeNames.Application.Json)]
     [ApiConventionType(typeof(DefaultApiConventions))]
