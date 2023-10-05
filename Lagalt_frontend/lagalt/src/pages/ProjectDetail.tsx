@@ -8,17 +8,15 @@ import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
 const Wrapper = styled.div`
- 
   display: flex;
   justify-content: center;
   margin-left: 50px;
   margin-right: 50px;
   flex-direction: column;
-overflow: hidden;`;
-
-const Project = styled.div`
-
+  overflow: hidden;
 `;
+
+const Project = styled.div``;
 
 const Button = styled.button`
   all: unset;
@@ -35,64 +33,48 @@ const Button = styled.button`
   &:hover {
     background-color: #975dd2;
   }
-  a{
+  a {
     color: white;
   }
 `;
-
-// const Container = styled.div`
-//   margin-left: 50px;
-//   margin-right: 50px;
-//   display: flex;
-//   flex-direction: column;
-// `;
 
 const ProjectDetail = () => {
   const { id } = useParams();
   const [project, setProject] = useState(null);
 
+  const apiUrl = process.env.REACT_APP_API_URL;
+
+  //Get data about the selected project from API
   useEffect(() => {
-    // Simulate fetching project data from an API using the project ID
-    fetch(`/api/projects/${id}`)
+    fetch(`${apiUrl}/api/v1/projects/${id}`)
       .then((response) => response.json())
       .then((data) => setProject(data))
       .catch((error) => console.error("Error fetching project data: ", error));
-  }, [id]);
+  }, []);
 
   return (
     <>
-      <div>Project Details:</div>
-      <div>Id: {id}</div>
-     
-
       <Wrapper>
-      <Button>
-        <Link to="/">
-          <FontAwesomeIcon icon={faChevronLeft} />
-        </Link>
-      </Button>
+        <Button>
+          <Link to="/">
+            <FontAwesomeIcon icon={faChevronLeft} />
+          </Link>
+        </Button>
         <Project>
-          <DetailedProject
-            title={"Test"}
-            longDescription={
-              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti, repudiandae. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nisi, repellendus numquam. Id cum reiciendis iste doloribus laudantium delectus, architecto, vel eaque exercitationem cumque amet excepturi. Ipsum impedit unde maiores, officiis expedita illum necessitatibus sint temporibus voluptatem, pariatur itaque dolore repudiandae aperiam molestiae tempore tenetur hic nesciunt inventore at dolores veritatis."
-            }
-            owner={"JC Baily"}
-            image={"https://randomuser.me/api/portraits/men/43.jpg"}
-            id={id}
-            githubUrl={"https://github.com/"}
-          />
+          {project ? (
+            <DetailedProject
+              title={project.title}
+              fullDescription={project.fullDescription}
+              owner={"JC Baily"}
+              image={"https://randomuser.me/api/portraits/men/43.jpg"}
+              id={id}
+              githubUrl={"https://github.com/"}
+            />
+          ) : (
+            <div>Loading project details...</div>
+          )}
         </Project>
-      </Wrapper>
-      {/* {project ? (
-        <div> */}
-      {/* <div>{project.title}</div>
-          <div>{project.description}</div> */}
-
-      {/* </div>
-      ) : (
-        <div>Loading project details...</div>
-      )} */}
+        </Wrapper>
     </>
   );
 };

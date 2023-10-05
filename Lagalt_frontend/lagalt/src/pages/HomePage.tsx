@@ -32,7 +32,6 @@ const MenuItem = styled.option`
   width: 80%;
   border-radius: 15px;
   margin-bottom: 5px;
-
   background-color: ${(props) => (props.selected ? "#481f70" : "none")};
 
   &:hover {
@@ -41,69 +40,13 @@ const MenuItem = styled.option`
 `;
 
 const HomePage = () => {
-  const x = [
-    {
-      title: "Prosjekt 0",
-      description:
-        "Prosjektbeskrivelse: Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus et tempore ex perspiciatis natus aperiam atque, facere rerum architecto reiciendis!",
-      owner: "Silje",
-      id: 0,
-      image: "https://randomuser.me/api/portraits/women/58.jpg",
-      categoryID: 0,
-    },
-    {
-      title: "Prosjekt 1",
-      description:
-        "Prosjektbeskrivelse: Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus et tempore ex perspiciatis natus aperiam atque, facere rerum architecto reiciendis!",
-      owner: "Silje",
-      id: 1,
-      image: "https://randomuser.me/api/portraits/women/58.jpg",
-      categoryID: 1,
-    },
-    {
-      title: "Prosjekt 2",
-      description:
-        "Prosjektbeskrivelse: Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus et tempore ex perspiciatis natus aperiam atque, facere rerum architecto reiciendis!",
-      owner: "Joakim",
-      id: 2,
-      image: "https://randomuser.me/api/portraits/men/30.jpg",
-      categoryID: 2,
-    },
-    {
-      title: "Prosjekt 3",
-      description:
-        "Prosjektbeskrivelse: Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus et tempore ex perspiciatis natus aperiam atque, facere rerum architecto reiciendis!",
-      owner: "Magnus",
-      id: 3,
-      image: "https://randomuser.me/api/portraits/men/73.jpg",
-      categoryID: 2,
-    },
-    {
-      title: "Prosjekt 4",
-      description:
-        "Prosjektbeskrivelse: Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus et tempore ex perspiciatis natus aperiam atque, facere rerum architecto reiciendis!",
-      owner: "Silje D",
-      id: 4,
-      image: "https://randomuser.me/api/portraits/women/44.jpg",
-      categoryID: 0,
-    },
-  ];
-
-  //Replace the array with actual data from api
-  const menuItems = [
-    { title: "Spill" },
-    { title: "Film" },
-    { title: "Webutvikling" },
-  ];
-
   const [categories, setCategories] = useState([]);
   const [projects, setProjects] = useState([]);
 
-  //let apiUrl = "https://lagalt-docker.azurewebsites.net";
-
+  //Get apiUrl from the .env file
   const apiUrl = process.env.REACT_APP_API_URL;
-  console.log(apiUrl);
 
+  //Get all categories from API
   useEffect(() => {
     fetch(`${apiUrl}/api/v1/categories`)
       .then((response) => response.json())
@@ -111,6 +54,7 @@ const HomePage = () => {
       .catch((error) => console.error("Error fetching categories", error));
   }, []);
 
+  //Get all projects from API
   useEffect(() => {
     fetch(`${apiUrl}/api/v1/projects`)
       .then((response) => response.json())
@@ -144,15 +88,15 @@ const HomePage = () => {
           })}
       </CategoryMenu>
 
-      {projects && projects.map((p) => {
-        index = p.categoryId -1; //The API doens't have an ID 0, so we need to force the index to start on 1
-        console.log(p);
-         if (index === selectedMenuItem) {
-          projectsToDisplay.push(p);
-          return <></>;
-        }
-      })}
-
+      {/* Listing out all the projects assosiated with a given category */}
+      {projects &&
+        projects.map((p) => {
+          index = p.categoryId - 1; //The API doens't have an ID 0, so we need to force the index to start on 1
+          if (index === selectedMenuItem) {
+            projectsToDisplay.push(p);
+            return <></>;
+          }
+        })}
       <ProjectList projects={projectsToDisplay} />
     </Wrapper>
   );

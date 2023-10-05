@@ -75,7 +75,7 @@ const CollaborationHeader = styled.div`
 
 const DetailedProject = ({
   title,
-  longDescription,
+  fullDescription,
   owner,
   image,
   id,
@@ -85,8 +85,8 @@ const DetailedProject = ({
 
   return (
     <StyledProjectListItem>
-      <Title>{title} - Id: {id}</Title>
-      <Description>{longDescription}</Description>
+      <Title>{title}</Title>
+      <Description>{fullDescription}</Description>
       <Details>
        <li>aner ikke</li>
        <li>hva skal stå her</li>
