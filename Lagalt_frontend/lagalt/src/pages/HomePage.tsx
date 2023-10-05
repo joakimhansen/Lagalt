@@ -52,7 +52,7 @@ const HomePage = () => {
       .then((response) => response.json())
       .then((data) => setCategories(data))
       .catch((error) => console.error("Error fetching categories", error));
-  }, []);
+  }, [apiUrl]);
 
   //Get all projects from API
   useEffect(() => {
@@ -60,7 +60,7 @@ const HomePage = () => {
       .then((response) => response.json())
       .then((data) => setProjects(data))
       .catch((error) => console.error("Error fetching categories", error));
-  }, []);
+  }, [apiUrl]);
 
   const [selectedMenuItem, setSelectedMenuItem] = useState(0);
 
@@ -95,9 +95,11 @@ const HomePage = () => {
           if (index === selectedMenuItem) {
             projectsToDisplay.push(p);
             return <></>;
-          }
+            
+          }console.log(projectsToDisplay)
         })}
-      <ProjectList projects={projectsToDisplay} />
+
+      {projectsToDisplay.length !== 1 ? <ProjectList projects={projectsToDisplay}/> : <div>no projects</div>}
     </Wrapper>
   );
 };
