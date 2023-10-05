@@ -3,12 +3,16 @@ import styled from "styled-components";
 import ProjectListItem from "./ProjectListItem.tsx";
 
 const StyledProjectList = styled.div`
-  width: 50%;
+  width: 65%;
   display: flex;
   margin-left: 20px;
   margin-top: 20px;
   flex-direction: column;
   gap: 20px;
+
+  @media (max-width: 480px){
+    width: 75%;
+  }
 `;
 
 const tests = [

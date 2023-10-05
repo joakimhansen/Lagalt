@@ -79,7 +79,7 @@ const ProjectDetail = () => {
             }
             owner={"JC Baily"}
             image={"https://randomuser.me/api/portraits/men/43.jpg"}
-            id={230}
+            id={id}
             githubUrl={"https://github.com/"}
           />
         </Project>

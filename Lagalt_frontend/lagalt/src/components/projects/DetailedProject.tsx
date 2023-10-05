@@ -46,7 +46,6 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
-
   
   @media (max-width: 1025px){
     flex-direction: column;
@@ -86,7 +85,7 @@ const DetailedProject = ({
 
   return (
     <StyledProjectListItem>
-      <Title>{title}</Title>
+      <Title>{title} - Id: {id}</Title>
       <Description>{longDescription}</Description>
       <Details>
        <li>aner ikke</li>

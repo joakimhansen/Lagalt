@@ -6,14 +6,24 @@ import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
 const TopicMenu = styled.div`
   width: 15%;
-
   list-style: none;
   margin-left: 20px;
   margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: 480px){
+    flex-direction: row;
+  }
 `;
 
 const Wrapper = styled.div`
   display: flex;
+  flex-direction: row;
+
+  @media (max-width: 480px){
+    flex-direction: column;
+  }
 `;
 const MenuItem = styled.option`
   all: unset;
