@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import ProfileHeaderItems from "./ProfileHeaderItems.tsx";
 
@@ -30,27 +30,39 @@ const Image = styled.img`
 
 const UserInfo = () => {
 
-    const test = [
-        {
-            name: "Silje D",
-            about: "Frontend utvikler med en bachelorgrad innen Frontend fra Høyskolen Kristiania",
-            skills: "React, JavaScript, TypeScript, .NET, Angular",
-        },
-        {
-            name: "Silje",
-            about: "Infoviter med en bachelorgrad innen Informasjonsvitenskap fra Univeristetet i Bergen",
-            skills: "React, JavaScript, TypeScript, .NET, Angular",
-        },
-    ];
+    // const test = [
+    //     {
+    //         name: "Silje D",
+    //         about: "Frontend utvikler med en bachelorgrad innen Frontend fra Høyskolen Kristiania",
+    //         skills: "React, JavaScript, TypeScript, .NET, Angular",
+    //     },
+    //     {
+    //         name: "Silje",
+    //         about: "Infoviter med en bachelorgrad innen Informasjonsvitenskap fra Univeristetet i Bergen",
+    //         skills: "React, JavaScript, TypeScript, .NET, Angular",
+    //     },
+    // ];
+
+    const [user, setUser] = useState([]);
+
+    const apiUrl = process.env.REACT_APP_API_URL;
+
+    useEffect(() => {
+    fetch(`${apiUrl}/api/v1/users`, {
+        method: "GET",
+    })
+        .then(response => response.json())
+        .then(data => setUser(data));
+    }, []);
 
     return (
         <ul>
             <ProfileInfoWrapper>
             <Image src="./../../assets/default-profile-picture.png" alt="Default profile picture"/>
-            {test.map((item, index) => {
-                if (item.name && index === 0) {
+            {user.map((item, index) => {
+                if (item.username && item.id === 1) {
                     return(
-                        <li key={index}>{item.name}</li>
+                        <li key={index}>{item.username}</li>
                     )
                 }
             })}
@@ -58,10 +70,4 @@ const UserInfo = () => {
         </ul>
     );
 }
-
-//             <Image src="./../../assets/default-profile-picture.png" alt="Default profile picture"/>
-//             <p>Silje Slettebakk</p>
-//         </ProfileInfoWrapper>
-//     );
-// };
 export default UserInfo;

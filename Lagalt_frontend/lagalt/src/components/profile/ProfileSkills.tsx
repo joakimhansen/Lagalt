@@ -1,5 +1,5 @@
-import React from "react";
 import styled from "styled-components";
+import React, { useState, useEffect } from 'react';
 
 const SkillsWrapper = styled.div`
     background-color: #28113e;
@@ -37,22 +37,26 @@ const SkillsWrapper = styled.div`
 
 const Skills = () => {
 
-    const tests = [
-        {skills: "React"}, 
-        {skills: "JavaScript"},
-        {skills: "TypeScript"},
-        {skills: ".NET"},
-        {skills: "Angular"}
-    ]
+    const [skills, setSkills] = useState([]);
+
+    const apiUrl = process.env.REACT_APP_API_URL;
+
+    useEffect(() => {
+    fetch(`${apiUrl}/api/v1/Skills`, {
+        method: "GET",
+    })
+        .then(response => response.json())
+        .then(data => setSkills(data));
+    }, []);
 
     return (
         <ul>
             <SkillsWrapper>
                 <h2>Mine skills:</h2>
-                {tests.map((item, index) => {
-                    if (item.skills) {
+                {skills.map((item, index) => {
+                    if (item.name) {
                         return(
-                            <li key={index}>{item.skills}</li>
+                            <li key={index}>{item.name}</li>
                         )
                     }
                 })}
