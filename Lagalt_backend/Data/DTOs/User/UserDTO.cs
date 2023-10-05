@@ -10,7 +10,7 @@ namespace Lagalt_backend.Data.DTOs.User
         public string Username { get; set; } = null!;
         public string? Info { get; set; }
 
-        public ICollection<ProjectUserDTO> Projects { get; set; }
-        public int[] Skills { get; set; }
+        public ICollection<ProjectUserDTO> Projects { get; set; } = new List<ProjectUserDTO>();
+        public int[] Skills { get; set; } = new int[] { };
     }
 }

@@ -27,6 +27,7 @@ namespace Lagalt_backend.Services.Skills
                 throw new EntityNotFoundException(nameof(Skill), id);
 
             return await _context.Skills
+                            .Include(skill => skill.Users)
                             .Where(skill => skill.Id == id)
                             .FirstAsync();
         }
