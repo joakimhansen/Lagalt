@@ -54,13 +54,12 @@ const ProjectList = (projects) => {
   return (
     <StyledProjectList>
       {projects.projects.map((p) => {
-        if (p.title && p.description && p.owner) {
+        if (p.title && p.shortDescription) {
           return (
             <ProjectListItem
               title={p.title}
-              description={p.description}
-              owner={p.owner}
-              image={p.image}
+              shortDescription={p.shortDescription}
+              
               id={p.id}
             />
           );

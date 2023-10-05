@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProjectList from "../components/projects/ProjectList.tsx";
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
-const TopicMenu = styled.div`
+const CategoryMenu = styled.div`
   width: 15%;
   list-style: none;
   margin-left: 20px;
@@ -12,7 +10,7 @@ const TopicMenu = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media (max-width: 480px){
+  @media (max-width: 480px) {
     flex-direction: row;
   }
 `;
@@ -21,7 +19,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
 
-  @media (max-width: 480px){
+  @media (max-width: 480px) {
     flex-direction: column;
   }
 `;
@@ -43,7 +41,7 @@ const MenuItem = styled.option`
 `;
 
 const HomePage = () => {
-  const projects = [
+  const x = [
     {
       title: "Prosjekt 0",
       description:
@@ -91,11 +89,34 @@ const HomePage = () => {
     },
   ];
 
+  //Replace the array with actual data from api
   const menuItems = [
     { title: "Spill" },
     { title: "Film" },
     { title: "Webutvikling" },
   ];
+
+  const [categories, setCategories] = useState([]);
+  const [projects, setProjects] = useState([]);
+
+  //let apiUrl = "https://lagalt-docker.azurewebsites.net";
+
+  const apiUrl = process.env.REACT_APP_API_URL;
+  console.log(apiUrl);
+
+  useEffect(() => {
+    fetch(`${apiUrl}/api/v1/categories`)
+      .then((response) => response.json())
+      .then((data) => setCategories(data))
+      .catch((error) => console.error("Error fetching categories", error));
+  }, []);
+
+  useEffect(() => {
+    fetch(`${apiUrl}/api/v1/projects`)
+      .then((response) => response.json())
+      .then((data) => setProjects(data))
+      .catch((error) => console.error("Error fetching categories", error));
+  }, []);
 
   const [selectedMenuItem, setSelectedMenuItem] = useState(0);
 
@@ -104,26 +125,30 @@ const HomePage = () => {
   };
 
   const projectsToDisplay = [{}];
+  let index;
 
   return (
     <Wrapper>
-      <TopicMenu>
-        {menuItems.map((m, index) => {
-          return (
-            <MenuItem
-              onClick={() => handleClick(index)}
-              selected={selectedMenuItem === index}
-              key={index}
-            >
-              {m.title}
-            </MenuItem>
-          );
-        })}
-      </TopicMenu>
+      <CategoryMenu>
+        {categories &&
+          categories.map((c, index) => {
+            return (
+              <MenuItem
+                onClick={() => handleClick(index)}
+                selected={selectedMenuItem === index}
+                key={index}
+              >
+                {c.name}
+              </MenuItem>
+            );
+          })}
+      </CategoryMenu>
 
-      {projects.map((c) => {
-        if (c.categoryID === selectedMenuItem) {
-            projectsToDisplay.push(c)
+      {projects && projects.map((p) => {
+        index = p.categoryId -1; //The API doens't have an ID 0, so we need to force the index to start on 1
+        console.log(p);
+         if (index === selectedMenuItem) {
+          projectsToDisplay.push(p);
           return <></>;
         }
       })}

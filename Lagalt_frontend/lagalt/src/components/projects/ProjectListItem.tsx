@@ -48,19 +48,19 @@ const Button = styled.button`
 `;
 
 
-const ProjectListItem = ({title, description, owner, image, id}) => {
+const ProjectListItem = ({title, shortDescription, id}) => {
 
     const navigate = useNavigate();
 
     return(
         <StyledProjectListItem>
             <Title>{title}</Title>
-            <Description>{description}</Description>
+            <Description>{shortDescription}</Description>
          
             <Wrapper>
             <Owner>
-                <Image src={image} alt={`Picture of ${owner}`}/>
-                {owner}
+                {/* <Image src={image} alt={`Picture of ${owner}`}/>
+                {owner} */}
             </Owner>
                 <Button onClick={() => navigate(`/projectDetails/${id}`)}>Se mer</Button>
             </Wrapper>
