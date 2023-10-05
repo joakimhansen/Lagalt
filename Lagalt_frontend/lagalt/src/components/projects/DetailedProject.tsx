@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Title = styled.div`
@@ -38,8 +38,6 @@ const Collaborators = styled.div`
   @media (max-width: 480px){
     flex-direction: column;
   }
-  
-
 `;
 const Wrapper = styled.div`
   display: flex;
@@ -81,7 +79,6 @@ const DetailedProject = ({
   id,
   githubUrl,
 }) => {
-  //const navigate = useNavigate();
 
   return (
     <StyledProjectListItem>
@@ -109,7 +106,7 @@ const DetailedProject = ({
           </Collaborator>
         </Collaborators>
         <Button to={githubUrl}>
-          Gå til Github
+          Go to Github
         </Button>
       </Wrapper>
     </StyledProjectListItem>

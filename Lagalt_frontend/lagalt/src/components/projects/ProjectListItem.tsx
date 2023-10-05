@@ -60,7 +60,7 @@ const ProjectListItem = ({ title, shortDescription, id }) => {
                 {owner} */}
         </Owner>
         <Button onClick={() => navigate(`/projectDetails/${id}`)}>
-          Se mer
+          View project
         </Button>
       </Wrapper>
     </StyledProjectListItem>

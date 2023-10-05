@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import ProjectListItem from "../components/projects/ProjectListItem.tsx";
 import styled from "styled-components";
 import DetailedProject from "../components/projects/DetailedProject.tsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -50,7 +49,7 @@ const ProjectDetail = () => {
       .then((response) => response.json())
       .then((data) => setProject(data))
       .catch((error) => console.error("Error fetching project data: ", error));
-  }, []);
+  }, [apiUrl, id]);
 
   return (
     <>

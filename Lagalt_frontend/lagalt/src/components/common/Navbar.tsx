@@ -9,7 +9,6 @@ border-bottom: 1px solid rgba(255,255,255,0.1);
   display: flex;
   justify-content: space-between;
   align-items: center;
- 
 
   a {
     text-decoration: none;
@@ -45,13 +44,13 @@ const Navbar = () => {
         </Logo>
       <NavWrapper>
         <li>
-          <Link to="/">Hjem</Link>
+          <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/profile">Profil</Link>
+          <Link to="/profile">Profile</Link>
         </li>
         <li>
-          <Link to="/login">Logg inn</Link>
+          <Link to="/login">Log in</Link>
         </li>
       </NavWrapper>
     </StyledNavbar>
