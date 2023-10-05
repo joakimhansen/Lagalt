@@ -29,52 +29,61 @@ namespace Lagalt_backend.Controllers {
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProjectsGetDTO>>> GetProjects() {
+        public async Task<ActionResult<IEnumerable<ProjectsListDTO>>> GetProjects() {
             return Ok(_mapper
-                .Map<IEnumerable<ProjectsGetDTO>>(
+                .Map<IEnumerable<ProjectsListDTO>>(
                 await _service.GetAllAsync()));
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<ProjectsGetDTO>> GetProject(int id) {
+        [HttpGet("{id}/u")]
+        public async Task<ActionResult<ProjectsUAuthGetDTO>> GetProject(int id) {
             try {
                 var project = await _service.GetByIdAsync(id);
-                return _mapper.Map<ProjectsGetDTO>(project);
+                return _mapper.Map<ProjectsUAuthGetDTO>(project);
             } catch (EntityNotFoundException ex) {
                 return NotFound(ex.Message);
             }
         }
-
-        [HttpPost]
-        public async Task<ActionResult<ProjectsGetDTO>> PostProject(ProjectsPostDTO project) {
-            var newProject = await _service.AddAsync(_mapper.Map<Project>(project));
-            return CreatedAtAction("PostProject",
-                new { id = newProject.Id },
-                _mapper.Map<ProjectsGetDTO>(newProject));
-        }
-
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutProject(int id, ProjectsPutDTO project) {
-            if (id != project.Id) {
-                return BadRequest();
-            }
+        [HttpGet("{id}/a")]
+        public async Task<ActionResult<ProjectsAuthGetDTO>> GetProjectA(int id) {
             try {
-                await _service.UpdateAsync(_mapper.Map<Project>(project));
-            } catch (EntityNotFoundException ex) {
-                return NotFound(ex.Message);
-            }
-            return NoContent();
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProject(int id) {
-            try {
-                await _service.DeleteByIdAsync(id);
-                return NoContent();
+                var project = await _service.GetByIdAsync(id);
+                return _mapper.Map<ProjectsAuthGetDTO>(project);
             } catch (EntityNotFoundException ex) {
                 return NotFound(ex.Message);
             }
         }
+        /*
+                [HttpPost]
+                public async Task<ActionResult<ProjectsGetDTO>> PostProject(ProjectsPostDTO project) {
+                    var newProject = await _service.AddAsync(_mapper.Map<Project>(project));
+                    return CreatedAtAction("PostProject",
+                        new { id = newProject.Id },
+                        _mapper.Map<ProjectsGetDTO>(newProject));
+                }
 
+                [HttpPut("{id}")]
+                public async Task<IActionResult> PutProject(int id, ProjectsPutDTO project) {
+                    if (id != project.Id) {
+                        return BadRequest();
+                    }
+                    try {
+                        await _service.UpdateAsync(_mapper.Map<Project>(project));
+                    } catch (EntityNotFoundException ex) {
+                        return NotFound(ex.Message);
+                    }
+                    return NoContent();
+                }
+
+                [HttpDelete("{id}")]
+                public async Task<IActionResult> DeleteProject(int id) {
+                    try {
+                        await _service.DeleteByIdAsync(id);
+                        return NoContent();
+                    } catch (EntityNotFoundException ex) {
+                        return NotFound(ex.Message);
+                    }
+                }
+        */
     }
 }

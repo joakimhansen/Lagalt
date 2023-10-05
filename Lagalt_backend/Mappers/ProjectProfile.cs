@@ -7,7 +7,11 @@ namespace Lagalt_backend.Mappers {
     public class ProjectProfile : Profile {
         public ProjectProfile() {
 
-            CreateMap<Project, ProjectsGetDTO>().ReverseMap();
+            CreateMap<Project, ProjectsUAuthGetDTO>();
+
+            CreateMap<Project, ProjectsAuthGetDTO>();
+
+            CreateMap<Project, ProjectsListDTO>();
 
             CreateMap<Project, ProjectsPostDTO>().ReverseMap();
 

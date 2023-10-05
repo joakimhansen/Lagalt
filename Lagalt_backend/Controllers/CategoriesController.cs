@@ -38,7 +38,7 @@ namespace Lagalt_backend.Controllers {
                 await _service.GetAllAsync()));
         }
 
-        [HttpGet("{id}")]
+        /*[HttpGet("{id}/u")]
         public async Task<ActionResult<CategoriesGetDTO>> GetCategory(int id) {
             try {
                 var category = await _service.GetByIdAsync(id);
@@ -47,8 +47,19 @@ namespace Lagalt_backend.Controllers {
                 return NotFound(ex.Message);
             }
         }
+        [HttpGet("{id}/a")]
+        public async Task<ActionResult<CategoriesGetDTO>> GetCategoryA(int id) {
+            try {
+                var category = await _service.GetByIdAsync(id);
+                return _mapper.Map<CategoriesGetDTO>(category);
+            } catch (EntityNotFoundException ex) {
+                return NotFound(ex.Message);
+            }
+        }*/
 
-        [HttpPost]
+
+
+        /*[HttpPost]
         public async Task<ActionResult<CategoriesGetDTO>> PostCategory(CategoriesPostDTO category) {
             var newCategory = await _service.AddAsync(_mapper.Map<Category>(category));
             return CreatedAtAction("PostCategory",
@@ -77,7 +88,7 @@ namespace Lagalt_backend.Controllers {
             } catch (EntityNotFoundException ex) {
                 return NotFound(ex.Message);
             }
-        }
+        }*/
 
     }
 }

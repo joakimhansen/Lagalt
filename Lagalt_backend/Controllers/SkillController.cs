@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿/*using AutoMapper;
 using Lagalt_backend.Data.DTOs.Skills;
 using Lagalt_backend.Data.Exceptions;
 using Lagalt_backend.Data.Models.Entities;
@@ -27,7 +27,7 @@ namespace Lagalt_backend.Controllers
             return Ok(_mapper.Map<IEnumerable<SkillDTO>>(await _service.GetAllAsync()));
         }
 
-        [HttpGet("{id}")]
+        *//*[HttpGet("{id}")]
         public async Task<ActionResult<SkillDTO>> GetSkill(int id)
         {
             try
@@ -80,6 +80,7 @@ namespace Lagalt_backend.Controllers
             {
                 return NotFound(ex.Message);
             }
-        }
+        }*//*
     }
 }
+*/

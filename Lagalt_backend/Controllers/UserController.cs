@@ -21,11 +21,11 @@ namespace Lagalt_backend.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
+        /*[HttpGet]
         public async Task<ActionResult<IEnumerable<UserDTO>>> GetUsers()
         {
             return Ok(_mapper.Map<IEnumerable<UserDTO>>(await _service.GetAllAsync()));
-        }
+        }*/
 
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDTO>> GetUser(int id)
@@ -39,7 +39,7 @@ namespace Lagalt_backend.Controllers
                 return NotFound(ex.Message);
             }
         }
-
+/*
         [HttpPost]
         public async Task<ActionResult<UserDTO>> PostUser(UserPostDTO User)
         {
@@ -82,6 +82,6 @@ namespace Lagalt_backend.Controllers
             {
                 return NotFound(ex.Message);
             }
-        }
+        }*/
     }
 }
