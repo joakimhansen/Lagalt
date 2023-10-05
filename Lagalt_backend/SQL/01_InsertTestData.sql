@@ -1,4 +1,4 @@
-USE [LagaltDb]
+USE [LagaltDB]
 
 INSERT INTO [User]
 VALUES ('magnusuttisrud', 'Test1')

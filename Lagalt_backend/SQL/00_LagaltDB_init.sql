@@ -1,14 +1,6 @@
-IF EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N'LagaltDb')
-BEGIN
-	ALTER DATABASE [LagaltDb] SET OFFLINE WITH ROLLBACK IMMEDIATE;
-	ALTER DATABASE [LagaltDb] SET ONLINE;
-	DROP DATABASE [LagaltDb];
-END
 
 
-CREATE DATABASE [LagaltDb]
-
-USE [LagaltDb]
+USE [LagaltDB]
 
 CREATE TABLE [User](
 	[Id] int IDENTITY(1,1) PRIMARY KEY,
@@ -34,8 +26,6 @@ CREATE TABLE [Skill](
 	[Id] int IDENTITY(1,1) PRIMARY KEY,
 	[Name] nvarchar(25) NOT NULL
 );
-
-USE [LagaltDb]
 
 CREATE TABLE [UserSkillLink](
 [User_Id] int FOREIGN KEY REFERENCES [User]([Id]),
