@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import UserInfo from "./ProfileHeader.tsx";
 
 const SkillsWrapper = styled.div`
     background-color: #28113e;
@@ -21,20 +20,20 @@ const SkillsWrapper = styled.div`
     }
 `;
 
-const SkillsButton = styled.button`
-    background-color: #7834bb;
-    border: none;
-    color: #e7daf5;
-    font-size: 16px;
-    border-radius: 20px;
-    padding: 10px 15px;
-    margin-left: 190px;
-    height: fit-content;
+// const SkillsButton = styled.button`
+//     background-color: #7834bb;
+//     border: none;
+//     color: #e7daf5;
+//     font-size: 16px;
+//     border-radius: 20px;
+//     padding: 10px 15px;
+//     margin-left: 190px;
+//     height: fit-content;
 
-    &:hover{
-        background-color: #975dd2;
-    }
-`;
+//     &:hover{
+//         background-color: #975dd2;
+//     }
+// `;
 
 const Skills = () => {
 
@@ -57,7 +56,7 @@ const Skills = () => {
                         )
                     }
                 })}
-                <SkillsButton>Add skill</SkillsButton>
+                {/* <SkillsButton>Add skill</SkillsButton> */}
             </SkillsWrapper>
         </ul>
     );
