@@ -9,6 +9,14 @@ namespace Lagalt_backend.Mappers {
 
             CreateMap<Project, ProjectsUAuthGetDTO>();
 
+            //CreateMap<Project, ProjectsAuthGetDTO>()
+            //    .ForMember(projectDto => projectDto.Creator, options => options
+            //        .MapFrom(project => project.Creator));
+
+            //CreateMap<Project, ProjectsListDTO>()
+            //    .ForMember(projectDto => projectDto.Creator, options => options
+            //        .MapFrom(project => project.Creator));
+
             CreateMap<Project, ProjectsAuthGetDTO>();
 
             CreateMap<Project, ProjectsListDTO>();

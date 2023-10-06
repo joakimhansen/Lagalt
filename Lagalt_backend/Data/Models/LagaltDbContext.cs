@@ -4,17 +4,13 @@ using Lagalt_backend.Data.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Lagalt_backend.Data.Models
-{
-    public partial class LagaltDbContext : DbContext
-    {
-        public LagaltDbContext()
-        {
+namespace Lagalt_backend.Data.Models {
+    public partial class LagaltDbContext : DbContext {
+        public LagaltDbContext() {
         }
 
         public LagaltDbContext(DbContextOptions<LagaltDbContext> options)
-            : base(options)
-        {
+            : base(options) {
         }
 
         public virtual DbSet<Category> Categories { get; set; } = null!;
@@ -22,25 +18,22 @@ namespace Lagalt_backend.Data.Models
         public virtual DbSet<Skill> Skills { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
 
-       /* protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer("Name=ConnectionStrings:LagaltTestDb");
-            }
-        }*/
+        /* protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+         {
+             if (!optionsBuilder.IsConfigured)
+             {
+                 optionsBuilder.UseSqlServer("Name=ConnectionStrings:LagaltTestDb");
+             }
+         }*/
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Category>(entity =>
-            {
+        protected override void OnModelCreating(ModelBuilder modelBuilder) {
+            modelBuilder.Entity<Category>(entity => {
                 entity.ToTable("Category");
 
                 entity.Property(e => e.Name).HasMaxLength(25);
             });
 
-            modelBuilder.Entity<Project>(entity =>
-            {
+            modelBuilder.Entity<Project>(entity => {
                 entity.ToTable("Project");
 
                 entity.Property(e => e.CategoryId).HasColumnName("Category_Id");
@@ -48,6 +41,10 @@ namespace Lagalt_backend.Data.Models
                 entity.Property(e => e.CreatorId).HasColumnName("Creator_Id");
 
                 entity.Property(e => e.FullDescription).HasColumnName("Full_Description");
+
+                entity.Property(e => e.Github_Url).HasMaxLength(200);
+
+                entity.Property(e => e.Progress);
 
                 entity.Property(e => e.ShortDescription)
                     .HasMaxLength(500)
@@ -66,18 +63,18 @@ namespace Lagalt_backend.Data.Models
                     .HasConstraintName("FK__Project__Creator__3C69FB99");
             });
 
-            modelBuilder.Entity<Skill>(entity =>
-            {
+            modelBuilder.Entity<Skill>(entity => {
                 entity.ToTable("Skill");
 
                 entity.Property(e => e.Name).HasMaxLength(25);
             });
 
-            modelBuilder.Entity<User>(entity =>
-            {
+            modelBuilder.Entity<User>(entity => {
                 entity.ToTable("User");
 
                 entity.Property(e => e.Info).HasMaxLength(1000);
+
+                entity.Property(e => e.Image_Url).HasMaxLength(200);
 
                 entity.Property(e => e.Username).HasMaxLength(25);
 
@@ -87,8 +84,7 @@ namespace Lagalt_backend.Data.Models
                         "UserSkillLink",
                         l => l.HasOne<Skill>().WithMany().HasForeignKey("SkillId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK__UserSkill__Skill__4222D4EF"),
                         r => r.HasOne<User>().WithMany().HasForeignKey("UserId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK__UserSkill__User___412EB0B6"),
-                        j =>
-                        {
+                        j => {
                             j.HasKey("UserId", "SkillId").HasName("UserSkillLink_Primary_Key");
 
                             j.ToTable("UserSkillLink");

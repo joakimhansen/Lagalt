@@ -13,14 +13,19 @@ namespace Lagalt_backend.Services.Projects {
         }
 
         public async Task<ICollection<Project>> GetAllAsync() {
-            return await _context.Projects.ToListAsync();
+            return await _context.Projects
+                .Include(p => p.Creator)
+                .Include(p => p.Category)
+                .ToListAsync();
         }
 
         public async Task<Project> GetByIdAsync(int id) {
             if (!await ProjectExistsAsync(id)) {
                 throw new EntityNotFoundException(nameof(Project), id);
             }
-            return await _context.Projects.Where(p => p.Id == id).FirstAsync();
+            return await _context.Projects.Where(p => p.Id == id)
+                .Include(p => p.Creator)
+                .FirstAsync();
         }
 
         public async Task<Project> AddAsync(Project obj) {

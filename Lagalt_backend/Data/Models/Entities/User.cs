@@ -14,6 +14,7 @@ namespace Lagalt_backend.Data.Models.Entities
         public int Id { get; set; }
         public string Username { get; set; } = null!;
         public string? Info { get; set; }
+        public string? Image_Url { get; set; }
 
         public virtual ICollection<Project> Projects { get; set; }
 

@@ -9,6 +9,8 @@ namespace Lagalt_backend.Data.Models.Entities
         public string Title { get; set; } = null!;
         public string? ShortDescription { get; set; }
         public string? FullDescription { get; set; }
+        public string? Github_Url { get; set; }
+        public int? Progress { get; set; }
         public int? CategoryId { get; set; }
         public int? CreatorId { get; set; }
 
