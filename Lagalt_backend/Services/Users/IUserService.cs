@@ -2,7 +2,7 @@
 
 namespace Lagalt_backend.Services.Users
 {
-    public interface IUserService : ICrudService<User, int>
+    public interface IUserService : ICrudService<User, string>
     {
     }
 }

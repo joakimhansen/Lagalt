@@ -7,7 +7,7 @@ namespace Lagalt_backend.Services.Skills
 {
     public class SkillService : ISkillService
     {
-        private readonly LagaltDbContext _context;
+        /*private readonly LagaltDbContext _context;
         public SkillService(LagaltDbContext context)
         {
             _context = context;
@@ -60,6 +60,30 @@ namespace Lagalt_backend.Services.Skills
 
             _context.Skills.Remove(SkillToDelete);
             await _context.SaveChangesAsync();
+        }*/
+        public Task<Skill> AddAsync(Skill obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ICollection<Skill>> GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Skill> GetByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Skill> UpdateAsync(Skill obj)
+        {
+            throw new NotImplementedException();
         }
     }
 }

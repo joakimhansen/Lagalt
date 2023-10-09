@@ -2,8 +2,9 @@
 {
     public class UserPutDTO
     {
-        public int Id { get; set; }
-        public string Name { get; set; } = null!;
+        public string Username { get; set; } = null!;
         public string? Info { get; set; }
+        public string? ImageUrl { get; set; }
+        public bool Hidden { get; set; }
     }
 }

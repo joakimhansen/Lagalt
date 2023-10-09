@@ -11,10 +11,10 @@ namespace Lagalt_backend.Data.Models.Entities
             Skills = new HashSet<Skill>();
         }
 
-        public int Id { get; set; }
         public string Username { get; set; } = null!;
         public string? Info { get; set; }
-        public string? Image_Url { get; set; }
+        public string? ImageUrl { get; set; }
+        public bool Hidden { get; set; }
 
         public virtual ICollection<Project> Projects { get; set; }
 

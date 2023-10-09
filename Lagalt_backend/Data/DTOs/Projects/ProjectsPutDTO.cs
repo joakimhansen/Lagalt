@@ -5,7 +5,9 @@
         public string? ShortDescription { get; set; }
         public string? FullDescription { get; set; }
         public int? CategoryId { get; set; }
-        public int? CreatorId { get; set; }
+        public string? CreatorName { get; set; }
+        public string? GithubUrl { get; set; }
+        public int? Progress { get; set; }
 
     }
 }

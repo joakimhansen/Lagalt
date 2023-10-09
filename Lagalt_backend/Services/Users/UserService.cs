@@ -23,20 +23,20 @@ namespace Lagalt_backend.Services.Users
             return users;
         }
 
-        public async Task<User> GetByIdAsync(int id)
+        public async Task<User> GetByIdAsync(string username)
         {
             User user = await _context.Users
-                            .Where(user => user.Id == id)
+                            .Where(user => user.Username == username)
                             .Include(user => user.Skills)
                             .Include(user => user.Projects)
                             .FirstAsync();
 
             if (user is null)
-                throw new EntityNotFoundException(nameof(User), id);
+                throw new UserNotFoundException(username);
 
             return user;
         }
-
+        /*
         public async Task<User> AddAsync(User newUser)
         {
             await _context.Users.AddAsync(newUser);
@@ -49,23 +49,38 @@ namespace Lagalt_backend.Services.Users
         {
             //Throws EntityNotFoundException if it doesn't exist
             var UserToDelete = await GetByIdAsync(id);
-            
+
             UserToDelete.Skills.Clear();
             UserToDelete.Projects.Clear();
-            
+
             _context.Users.Remove(UserToDelete);
             await _context.SaveChangesAsync();
-        }
+        }*/
 
         public async Task<User> UpdateAsync(User updatedUser)
         {
-            if (!await _context.Users.AnyAsync(user => user.Id == updatedUser.Id))
-                throw new EntityNotFoundException(nameof(User), updatedUser.Id);
+            if (!await _context.Users.AnyAsync(user => user.Username == updatedUser.Username))
+                throw new UserNotFoundException(updatedUser.Username);
 
             _context.Entry(updatedUser).State = EntityState.Modified;
             _context.SaveChanges();
 
             return updatedUser;
+        }
+        public Task<User> AddAsync(User obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteByIdAsync(string username)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public Task<User> GetByIdAsync(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

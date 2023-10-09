@@ -24,13 +24,33 @@ namespace Lagalt_backend.Controllers {
             return Ok(_mapper.Map<IEnumerable<UserDTO>>(await _service.GetAllAsync()));
         }*/
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<UserDTO>> GetUser(int id) {
+        [HttpGet("{username}")]
+        public async Task<ActionResult<UserDTO>> GetUser(string username) {
             try {
-                return Ok(_mapper.Map<UserDTO>(await _service.GetByIdAsync(id)));
+                return Ok(_mapper.Map<UserDTO>(await _service.GetByIdAsync(username)));
             } catch (EntityNotFoundException ex) {
                 return NotFound(ex.Message);
             }
+        }
+
+        [HttpPut("{username}")]
+        public async Task<IActionResult> PutUser(string username, UserPutDTO User)
+        {
+            if (username != User.Username)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                await _service.UpdateAsync(_mapper.Map<User>(User));
+            }
+            catch (EntityNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+
+            return NoContent();
         }
         /*
                 [HttpPost]
@@ -43,25 +63,7 @@ namespace Lagalt_backend.Controllers {
                         _mapper.Map<UserDTO>(newUser));
                 }
 
-                [HttpPut("{id}")]
-                public async Task<IActionResult> PutUser(int id, UserPutDTO User)
-                {
-                    if (id != User.Id)
-                    {
-                        return BadRequest();
-                    }
-
-                    try
-                    {
-                        await _service.UpdateAsync(_mapper.Map<User>(User));
-                    }
-                    catch (EntityNotFoundException ex)
-                    {
-                        return NotFound(ex.Message);
-                    }
-
-                    return NoContent();
-                }
+                
 
                 [HttpDelete("{id}")]
                 public async Task<IActionResult> DeleteUser(int id)

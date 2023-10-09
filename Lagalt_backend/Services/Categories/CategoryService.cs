@@ -3,7 +3,8 @@ using Lagalt_backend.Data.Models;
 using Lagalt_backend.Data.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Lagalt_backend.Services.Categories {
+namespace Lagalt_backend.Services.Categories
+{
     public class CategoryService : ICategoryService {
 
         private readonly LagaltDbContext _context;

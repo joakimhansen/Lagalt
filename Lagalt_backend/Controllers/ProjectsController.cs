@@ -53,6 +53,23 @@ namespace Lagalt_backend.Controllers {
                 return NotFound(ex.Message);
             }
         }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutProject(int id, ProjectsPutDTO project)
+        {
+            if (id != project.Id)
+            {
+                return BadRequest();
+            }
+            try
+            {
+                await _service.UpdateAsync(_mapper.Map<Project>(project));
+            }
+            catch (EntityNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            return NoContent();
+        }
         /*
                 [HttpPost]
                 public async Task<ActionResult<ProjectsGetDTO>> PostProject(ProjectsPostDTO project) {

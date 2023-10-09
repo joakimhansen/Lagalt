@@ -3,39 +3,40 @@ using Lagalt_backend.Data.Models;
 using Lagalt_backend.Data.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Lagalt_backend.Services.Projects {
-    public class ProjectService : IProjectService {
+namespace Lagalt_backend.Services.Projects
+{
+    public class ProjectService : IProjectService
+    {
 
         private readonly LagaltDbContext _context;
 
-        public ProjectService(LagaltDbContext context) {
+        public ProjectService(LagaltDbContext context)
+        {
             _context = context;
         }
 
-        public async Task<ICollection<Project>> GetAllAsync() {
+        public async Task<ICollection<Project>> GetAllAsync()
+        {
             return await _context.Projects
                 .Include(p => p.Creator)
                 .Include(p => p.Category)
                 .ToListAsync();
         }
 
-        public async Task<Project> GetByIdAsync(int id) {
-            if (!await ProjectExistsAsync(id)) {
+        public async Task<Project> GetByIdAsync(int id)
+        {
+            if (!await ProjectExistsAsync(id))
+            {
                 throw new EntityNotFoundException(nameof(Project), id);
             }
             return await _context.Projects.Where(p => p.Id == id)
                 .Include(p => p.Creator)
                 .FirstAsync();
         }
-
-        public async Task<Project> AddAsync(Project obj) {
-            await _context.Projects.AddAsync(obj);
-            await _context.SaveChangesAsync();
-            return obj;
-        }
-
-        public async Task<Project> UpdateAsync(Project obj) {
-            if (!await ProjectExistsAsync(obj.Id)) {
+        public async Task<Project> UpdateAsync(Project obj)
+        {
+            if (!await ProjectExistsAsync(obj.Id))
+            {
                 throw new EntityNotFoundException(nameof(Project), obj.Id);
             }
             _context.Entry(obj).State = EntityState.Modified;
@@ -43,8 +44,19 @@ namespace Lagalt_backend.Services.Projects {
             return obj;
         }
 
-        public async Task DeleteByIdAsync(int id) {
-            if (!await ProjectExistsAsync(id)) {
+        /*public async Task<Project> AddAsync(Project obj)
+        {
+            await _context.Projects.AddAsync(obj);
+            await _context.SaveChangesAsync();
+            return obj;
+        }
+
+       
+
+        public async Task DeleteByIdAsync(int id)
+        {
+            if (!await ProjectExistsAsync(id))
+            {
                 throw new EntityNotFoundException(nameof(Project), id);
             }
             var project = await _context.Projects
@@ -53,11 +65,20 @@ namespace Lagalt_backend.Services.Projects {
 
             _context.Projects.Remove(project);
             _context.SaveChanges();
-        }
+        }*/
 
-        private Task<bool> ProjectExistsAsync(int projectId) {
+        private Task<bool> ProjectExistsAsync(int projectId)
+        {
             return _context.Projects.AnyAsync(p => p.Id == projectId);
         }
+        public Task<Project> AddAsync(Project obj)
+        {
+            throw new NotImplementedException();
+        }
 
+        public Task DeleteByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

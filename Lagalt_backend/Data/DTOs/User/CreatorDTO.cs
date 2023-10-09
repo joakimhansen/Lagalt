@@ -2,6 +2,6 @@
     public class CreatorDTO {
         public int Id { get; set; }
         public string Username { get; set; } = null!;
-        public string? Image_Url { get; set; }
+        public string? ImageUrl { get; set; }
     }
 }
