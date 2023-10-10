@@ -54,22 +54,28 @@ namespace Lagalt_backend.Controllers {
             }
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProject(int id, ProjectsPutDTO project)
-        {
-            if (id != project.Id)
-            {
+        public async Task<IActionResult> PutProject(int id, ProjectsPutDTO project) {
+            if (id != project.Id) {
                 return BadRequest();
             }
-            try
-            {
+            try {
                 await _service.UpdateAsync(_mapper.Map<Project>(project));
-            }
-            catch (EntityNotFoundException ex)
-            {
+            } catch (EntityNotFoundException ex) {
                 return NotFound(ex.Message);
             }
             return NoContent();
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteProject(int id) {
+            try {
+                await _service.DeleteByIdAsync(id);
+                return NoContent();
+            } catch (EntityNotFoundException ex) {
+                return NotFound(ex.Message);
+            }
+        }
+
         /*
                 [HttpPost]
                 public async Task<ActionResult<ProjectsGetDTO>> PostProject(ProjectsPostDTO project) {
@@ -92,15 +98,6 @@ namespace Lagalt_backend.Controllers {
                     return NoContent();
                 }
 
-                [HttpDelete("{id}")]
-                public async Task<IActionResult> DeleteProject(int id) {
-                    try {
-                        await _service.DeleteByIdAsync(id);
-                        return NoContent();
-                    } catch (EntityNotFoundException ex) {
-                        return NotFound(ex.Message);
-                    }
-                }
         */
     }
 }
