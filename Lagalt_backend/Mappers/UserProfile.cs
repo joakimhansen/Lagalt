@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Lagalt_backend.Data.DTOs.Projects;
 using Lagalt_backend.Data.DTOs.User;
 using Lagalt_backend.Data.Models.Entities;
 
@@ -18,6 +19,8 @@ namespace Lagalt_backend.Mappers
 
             CreateMap<UserPostDTO, User>();
             CreateMap<UserPutDTO, User>();
+
+            CreateMap<User, CollaboratorDTO>();
         }
     }
 }

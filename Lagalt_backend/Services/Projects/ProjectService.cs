@@ -3,8 +3,7 @@ using Lagalt_backend.Data.Models;
 using Lagalt_backend.Data.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Lagalt_backend.Services.Projects
-{
+namespace Lagalt_backend.Services.Projects {
     public class ProjectService : IProjectService {
 
         private readonly LagaltDbContext _context;
@@ -17,6 +16,7 @@ namespace Lagalt_backend.Services.Projects
             return await _context.Projects
                 .Include(p => p.Creator)
                 .Include(p => p.Category)
+                .Include(p => p.Collaborators)
                 .ToListAsync();
         }
 
@@ -26,6 +26,7 @@ namespace Lagalt_backend.Services.Projects
             }
             return await _context.Projects.Where(p => p.Id == id)
                 .Include(p => p.Creator)
+                .Include(p => p.Collaborators)
                 .FirstAsync();
         }
         public async Task<Project> UpdateAsync(Project obj) {
