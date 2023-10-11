@@ -10,7 +10,7 @@ namespace Lagalt_backend.Mappers
         {
             CreateMap<User, UserDTO>()
                 .ForMember(userDto => userDto.Projects, options => options
-                    .MapFrom(user => user.Projects))
+                    .MapFrom(user => user.ProjectsCreator.Concat(user.ProjectsCollaborator)))
                 .ForMember(userDto => userDto.Skills, options => options
                     .MapFrom(user => user.Skills.Select(skill => skill.Name)));
 

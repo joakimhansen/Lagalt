@@ -7,7 +7,9 @@ namespace Lagalt_backend.Data.Models.Entities
     {
         public User()
         {
-            Projects = new HashSet<Project>();
+            CollaboratorApplications = new HashSet<CollaboratorApplication>();
+            ProjectsCreator = new HashSet<Project>();
+            ProjectsCollaborator = new HashSet<Project>();
             Skills = new HashSet<Skill>();
         }
 
@@ -16,8 +18,10 @@ namespace Lagalt_backend.Data.Models.Entities
         public string? ImageUrl { get; set; }
         public bool Hidden { get; set; }
 
-        public virtual ICollection<Project> Projects { get; set; }
+        public virtual ICollection<CollaboratorApplication> CollaboratorApplications { get; set; }
+        public virtual ICollection<Project> ProjectsCreator { get; set; }
 
+        public virtual ICollection<Project> ProjectsCollaborator { get; set; }
         public virtual ICollection<Skill> Skills { get; set; }
     }
 }

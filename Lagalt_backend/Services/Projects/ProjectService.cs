@@ -3,7 +3,8 @@ using Lagalt_backend.Data.Models;
 using Lagalt_backend.Data.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Lagalt_backend.Services.Projects {
+namespace Lagalt_backend.Services.Projects
+{
     public class ProjectService : IProjectService {
 
         private readonly LagaltDbContext _context;

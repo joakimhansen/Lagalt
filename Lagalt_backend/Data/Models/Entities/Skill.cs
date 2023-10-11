@@ -7,12 +7,14 @@ namespace Lagalt_backend.Data.Models.Entities
     {
         public Skill()
         {
-            Users = new HashSet<User>();
+            Projects = new HashSet<Project>();
+            Usernames = new HashSet<User>();
         }
 
         public int Id { get; set; }
         public string Name { get; set; } = null!;
 
-        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<Project> Projects { get; set; }
+        public virtual ICollection<User> Usernames { get; set; }
     }
 }

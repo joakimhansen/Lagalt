@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Data\Models\Entities\" />
     <Folder Include="Upload\Files\" />
   </ItemGroup>
 

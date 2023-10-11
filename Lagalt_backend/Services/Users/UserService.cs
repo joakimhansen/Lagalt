@@ -18,7 +18,7 @@ namespace Lagalt_backend.Services.Users
         {
             List<User> users = await _context.Users
                                     .Include(user => user.Skills)
-                                    .Include(user => user.Projects)
+                                    .Include(user => user.ProjectsCreator)
                                     .ToListAsync();
             return users;
         }
@@ -28,7 +28,8 @@ namespace Lagalt_backend.Services.Users
             User user = await _context.Users
                             .Where(user => user.Username == username)
                             .Include(user => user.Skills)
-                            .Include(user => user.Projects)
+                            .Include(user => user.ProjectsCreator)
+                            .Include(user => user.ProjectsCollaborator)
                             .FirstAsync();
 
             if (user is null)
