@@ -1,4 +1,4 @@
-﻿/*using AutoMapper;
+﻿using AutoMapper;
 using Lagalt_backend.Data.DTOs.Skills;
 using Lagalt_backend.Data.Models.Entities;
 
@@ -8,13 +8,16 @@ namespace Lagalt_backend.Mappers
     {
         public SkillProfile() 
         {
-            CreateMap<Skill, SkillDTO>()
-                .ForMember(skillDto => skillDto.UserIds, options => options
-                    .MapFrom(skill => skill.Users.Select(user => user.Id)));
+            CreateMap<NeededSkillDTO, Skill>()
+                .ForMember(skillDto => skillDto.Name, options => options
+                    .MapFrom(skill => skill.Name));
 
-            CreateMap<SkillPostDTO, Skill>();
-            CreateMap<SkillPutDTO, Skill>();
+            //CreateMap<Skill, SkillDTO>()
+            //.ForMember(skillDto => skillDto.UserIds, options => options
+            //    .MapFrom(skill => skill.Users.Select(user => user.Id)));
+
+            //CreateMap<SkillPostDTO, Skill>();
+            //CreateMap<SkillPutDTO, Skill>();
         }
     }
 }
-*/

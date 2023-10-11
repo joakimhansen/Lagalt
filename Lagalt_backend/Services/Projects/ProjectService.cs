@@ -17,6 +17,8 @@ namespace Lagalt_backend.Services.Projects {
                 .Include(p => p.Creator)
                 .Include(p => p.Category)
                 .Include(p => p.Collaborators)
+                .Include(p => p.CollaboratorApplications)
+                .Include(p => p.Skills)
                 .ToListAsync();
         }
 
@@ -27,6 +29,8 @@ namespace Lagalt_backend.Services.Projects {
             return await _context.Projects.Where(p => p.Id == id)
                 .Include(p => p.Creator)
                 .Include(p => p.Collaborators)
+                .Include(p => p.CollaboratorApplications)
+                .Include(p => p.Skills)
                 .FirstAsync();
         }
         public async Task<Project> UpdateAsync(Project obj) {

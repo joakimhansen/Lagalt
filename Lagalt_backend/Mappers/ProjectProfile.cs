@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Lagalt_backend.Data.DTOs.CollaboratorApplications;
 using Lagalt_backend.Data.DTOs.Projects;
 using Lagalt_backend.Data.Models.Entities;
 
@@ -16,9 +17,18 @@ namespace Lagalt_backend.Mappers {
             //    .ForMember(projectDto => projectDto.Creator, options => options
             //        .MapFrom(project => project.Creator));
 
-            CreateMap<Project, ProjectsAuthGetDTO>();
+            CreateMap<Project, ProjectsAuthGetDTO>()
+                .ForMember(projectDto => projectDto.Applications, options => options
+                    .MapFrom(project => project.CollaboratorApplications))
+                .ForMember(projectDto => projectDto.NeededSkills, options => options
+                    .MapFrom(project => project.Skills));
 
-            CreateMap<Project, ProjectsListDTO>();
+            CreateMap<Project, ProjectsListDTO>()
+                .ForMember(projectDto => projectDto.Applications, options => options
+                    .MapFrom(project => project.CollaboratorApplications))
+                .ForMember(projectDto => projectDto.NeededSkills, options => options
+                    .MapFrom(project => project.Skills));
+
 
             CreateMap<Project, ProjectsPostDTO>().ReverseMap();
 
