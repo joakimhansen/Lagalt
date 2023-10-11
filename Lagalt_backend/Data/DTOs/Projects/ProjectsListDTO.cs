@@ -12,7 +12,7 @@ namespace Lagalt_backend.Data.DTOs.Projects {
         public CreatorDTO? Creator { get; set; }
         public ICollection<CollaboratorDTO> Collaborators { get; set; } = new List<CollaboratorDTO>();
         public ICollection<ApplicationDTO> Applications { get; set; } = new List<ApplicationDTO>();
-        public ICollection<NeededSkillDTO> NeededSkills { get; set; } = new List<NeededSkillDTO>();
+        public string[] NeededSkills { get; set; } = new string[] { };
 
 
         //public string? Github_Url { get; set; }
