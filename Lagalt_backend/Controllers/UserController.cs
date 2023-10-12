@@ -34,19 +34,14 @@ namespace Lagalt_backend.Controllers {
         }
 
         [HttpPut("{username}")]
-        public async Task<IActionResult> PutUser(string username, UserPutDTO User)
-        {
-            if (username != User.Username)
-            {
+        public async Task<IActionResult> PutUser(string username, UserPutDTO User) {
+            if (username != User.Username) {
                 return BadRequest();
             }
 
-            try
-            {
+            try {
                 await _service.UpdateAsync(_mapper.Map<User>(User));
-            }
-            catch (EntityNotFoundException ex)
-            {
+            } catch (EntityNotFoundException ex) {
                 return NotFound(ex.Message);
             }
 

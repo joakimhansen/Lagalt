@@ -9,7 +9,7 @@ namespace Lagalt_backend.Mappers
         public SkillProfile() 
         {
 
-            CreateMap<NeededSkillDTO, Skill>().ReverseMap();
+            CreateMap<SkillDTO, Skill>().ReverseMap();
 
             //CreateMap<Skill, SkillDTO>()
             //.ForMember(skillDto => skillDto.UserIds, options => options

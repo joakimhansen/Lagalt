@@ -7,7 +7,7 @@ namespace Lagalt_backend.Data.DTOs.Projects {
         public int Id { get; set; }
         public string Title { get; set; } = null!;
         public string? FullDescription { get; set; }
-        public CreatorDTO Creator { get; set; }
+        public CollaboratorDTO Creator { get; set; }
         public int? Progress { get; set; }
 
         //public string? Github_Url { get; set; }

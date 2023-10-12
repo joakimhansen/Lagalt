@@ -9,7 +9,7 @@ namespace Lagalt_backend.Data.DTOs.Projects {
         public int Id { get; set; }
         public string Title { get; set; } = null!;
         public string? FullDescription { get; set; }
-        public CreatorDTO? Creator { get; set; }
+        public CollaboratorDTO? Creator { get; set; }
         public ICollection<CollaboratorDTO> Collaborators { get; set; } = new List<CollaboratorDTO>();
 
         public ICollection<ApplicationDTO> Applications { get; set; } = new List<ApplicationDTO>();

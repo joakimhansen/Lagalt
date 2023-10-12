@@ -30,8 +30,6 @@ namespace Lagalt_backend.Mappers {
                     .MapFrom(project => project.Skills.Select(skill => skill.Name)));
 
 
-            CreateMap<Project, ProjectsPostDTO>().ReverseMap();
-
             CreateMap<Project, ProjectsPutDTO>().ReverseMap();
 
             CreateMap<Project, ProjectUserDTO>().ReverseMap();
