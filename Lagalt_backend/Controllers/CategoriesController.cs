@@ -29,8 +29,10 @@ namespace Lagalt_backend.Controllers {
             _mapper = mapper;
         }
 
-        // Categories
-
+        /// <summary>
+        /// Get all the categories
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CategoriesGetDTO>>> GetCategories() {
             return Ok(_mapper
