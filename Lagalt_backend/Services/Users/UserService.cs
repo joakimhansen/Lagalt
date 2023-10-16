@@ -29,6 +29,7 @@ namespace Lagalt_backend.Services.Users
                             .Where(user => user.Username == username)
                             .Include(user => user.Skills)
                             .Include(user => user.ProjectsCreator)
+                            .ThenInclude(project => project.CollaboratorApplications)
                             .Include(user => user.ProjectsCollaborator)
                             .FirstAsync();
 

@@ -46,7 +46,7 @@ namespace Lagalt_backend.Controllers {
             }
         }
 
-        [HttpPost("AddApplication")]
+        [HttpPost]
         public async Task<ActionResult<ApplicationDTO>> CreateApplication(ApplicationPostDTO application) {
             var newApplication = await _service.CreateApplication(_mapper.Map<CollaboratorApplication>(application));
             return CreatedAtAction("CreateApplication",

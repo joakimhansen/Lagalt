@@ -48,10 +48,19 @@ namespace Lagalt_backend.Services.Projects {
             }
             var project = await _context.Projects
                 .Where(p => p.Id == id)
+                .Include(P => P.Collaborators)
+                .Include(p => p.Skills)
+                .Include(p => p.CollaboratorApplications)
                 .FirstAsync();
 
+            foreach (var application in project.CollaboratorApplications)
+            {
+                _context.CollaboratorApplications.Remove(application);
+            }
+            project.Collaborators.Clear();
+            project.Skills.Clear();
             _context.Projects.Remove(project);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
         /*public async Task<Project> AddAsync(Project obj)
