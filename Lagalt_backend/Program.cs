@@ -1,4 +1,5 @@
 using Lagalt_backend.Data.Models;
+using Lagalt_backend.Services.Applications;
 using Lagalt_backend.Services.Categories;
 using Lagalt_backend.Services.Projects;
 using Lagalt_backend.Services.Skills;
@@ -19,6 +20,7 @@ namespace Lagalt_backend {
             builder.Services.AddScoped<ISkillService, SkillService>();
             builder.Services.AddScoped<IProjectService, ProjectService>();
             builder.Services.AddScoped<ICategoryService, CategoryService>();
+            builder.Services.AddScoped<IApplicationService, CollaboratorApplicationService>();
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -29,8 +31,8 @@ namespace Lagalt_backend {
 
             // Configure the HTTP request pipeline.
             //if (app.Environment.IsDevelopment()) {
-                app.UseSwagger();
-                app.UseSwaggerUI();
+            app.UseSwagger();
+            app.UseSwaggerUI();
             //s}
 
             app.UseHttpsRedirection();

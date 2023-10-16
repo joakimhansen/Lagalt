@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Lagalt_backend.Data.Models.Entities
-{
-    public partial class CollaboratorApplication
-    {
+namespace Lagalt_backend.Data.Models.Entities {
+    public partial class CollaboratorApplication {
         public int Id { get; set; }
         public string Content { get; set; } = null!;
         public string? User { get; set; }
