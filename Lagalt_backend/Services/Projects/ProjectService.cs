@@ -33,13 +33,20 @@ namespace Lagalt_backend.Services.Projects {
                 .Include(p => p.Skills)
                 .FirstAsync();
         }
-        public async Task<Project> UpdateAsync(Project obj) {
-            if (!await ProjectExistsAsync(obj.Id)) {
-                throw new EntityNotFoundException(nameof(Project), obj.Id);
+        public async Task<Project> UpdateAsync(Project UpdatedProject) {
+            if (!await ProjectExistsAsync(UpdatedProject.Id)) {
+                throw new EntityNotFoundException(nameof(Project), UpdatedProject.Id);
             }
-            _context.Entry(obj).State = EntityState.Modified;
+
+            var project = await _context.Projects
+                .Where(p => p.Id == UpdatedProject.Id)
+                .FirstAsync();
+            project.FullDescription = UpdatedProject.FullDescription;
+            project.Progress = UpdatedProject.Progress;
+
+            _context.Entry(project).State = EntityState.Modified;
             _context.SaveChanges();
-            return obj;
+            return UpdatedProject;
         }
 
         public async Task DeleteByIdAsync(int id) {
