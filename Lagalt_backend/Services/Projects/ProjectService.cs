@@ -34,16 +34,16 @@ namespace Lagalt_backend.Services.Projects {
                 .Include(p => p.Skills)
                 .FirstAsync();
         }
-        public async Task<Project> UpdateAsync(int id, ProjectsPutDTO UpdatedProject) {
-            if (!await ProjectExistsAsync(id)) {
-                throw new EntityNotFoundException(nameof(Project), id);
+        public async Task<Project> UpdateAsync(Project UpdatedValues) {
+            if (!await ProjectExistsAsync(UpdatedValues.Id)) {
+                throw new EntityNotFoundException(nameof(Project), UpdatedValues.Id);
             }
 
             var project = await _context.Projects
-                .Where(p => p.Id == id)
+                .Where(p => p.Id == UpdatedValues.Id)
                 .FirstAsync();
-            project.FullDescription = UpdatedProject.FullDescription;
-            project.Progress = UpdatedProject.Progress;
+            project.FullDescription = UpdatedValues.FullDescription;
+            project.Progress = UpdatedValues.Progress;
 
             _context.Entry(project).State = EntityState.Modified;
             _context.SaveChanges();
@@ -86,9 +86,9 @@ namespace Lagalt_backend.Services.Projects {
         private Task<bool> ProjectExistsAsync(int projectId) {
             return _context.Projects.AnyAsync(p => p.Id == projectId);
         }
-        public Task<Project> AddAsync(Project obj) {
+        public Task<Project> AddAsync(Project obj)
+        {
             throw new NotImplementedException();
         }
-
     }
 }

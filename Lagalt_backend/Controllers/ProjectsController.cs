@@ -56,16 +56,20 @@ namespace Lagalt_backend.Controllers {
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProject(int id, [FromForm] ProjectsPutDTO project) {
-            /*if (id != project.Id) {
-                return BadRequest();
-            }*/
-            try {
-                await _service.UpdateAsync(id, _mapper.Map<Project>(project));
+        public async Task<IActionResult> PutProject(int id, [FromForm] ProjectsPutDTO UpdatedValues) {
+            if (id != UpdatedValues.Id)
+                return BadRequest($"Object id {UpdatedValues.Id} does not match project referenced in API-endpoint /api/v1/projects/{id}");
+
+            if (!(new int[] { 0, 1, 2, 3 }).Contains(UpdatedValues.Progress))
+                return BadRequest($"{UpdatedValues.Progress} is not a valid input for progress");
+
+            try
+            {
+                await _service.UpdateAsync(_mapper.Map<Project>(UpdatedValues));
+                return NoContent();
             } catch (EntityNotFoundException ex) {
                 return NotFound(ex.Message);
             }
-            return NoContent();
         }
 
         [HttpDelete("{id}")]
