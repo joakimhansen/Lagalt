@@ -12,6 +12,7 @@ using AutoMapper;
 using Lagalt_backend.Data.DTOs.Projects;
 using Lagalt_backend.Data.Exceptions;
 using System.Net.Mime;
+using System.Web;
 
 namespace Lagalt_backend.Controllers {
     [Route("api/v1/projects")]
@@ -53,8 +54,9 @@ namespace Lagalt_backend.Controllers {
                 return NotFound(ex.Message);
             }
         }
+
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProject(int id, ProjectsPutDTO project) {
+        public async Task<IActionResult> PutProject(int id, [FromForm] ProjectsPutDTO project) {
             if (id != project.Id) {
                 return BadRequest();
             }
