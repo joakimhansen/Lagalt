@@ -3,19 +3,15 @@ using Lagalt_backend.Data.Models;
 using Lagalt_backend.Data.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Lagalt_backend.Services.Users
-{
-    public class UserService : IUserService
-    {
+namespace Lagalt_backend.Services.Users {
+    public class UserService : IUserService {
         private readonly LagaltDbContext _context;
 
-        public UserService(LagaltDbContext context)
-        {
+        public UserService(LagaltDbContext context) {
             _context = context;
         }
 
-        public async Task<ICollection<User>> GetAllAsync()
-        {
+        public async Task<ICollection<User>> GetAllAsync() {
             List<User> users = await _context.Users
                                     .Include(user => user.Skills)
                                     .Include(user => user.ProjectsCreator)
@@ -23,8 +19,7 @@ namespace Lagalt_backend.Services.Users
             return users;
         }
 
-        public async Task<User> GetByIdAsync(string username)
-        {
+        public async Task<User> GetByIdAsync(string username) {
             User user = await _context.Users
                             .Where(user => user.Username == username)
                             .Include(user => user.Skills)
@@ -59,8 +54,7 @@ namespace Lagalt_backend.Services.Users
             await _context.SaveChangesAsync();
         }*/
 
-        public async Task<User> UpdateAsync(User updatedUser)
-        {
+        public async Task<User> UpdateAsync(User updatedUser) {
             if (!await _context.Users.AnyAsync(user => user.Username == updatedUser.Username))
                 throw new UserNotFoundException(updatedUser.Username);
 
@@ -69,19 +63,16 @@ namespace Lagalt_backend.Services.Users
 
             return updatedUser;
         }
-        public Task<User> AddAsync(User obj)
-        {
+        public Task<User> AddAsync(User obj) {
             throw new NotImplementedException();
         }
 
-        public Task DeleteByIdAsync(string username)
-        {
+        public Task DeleteByIdAsync(string username) {
             throw new NotImplementedException();
         }
 
 
-        public Task<User> GetByIdAsync(int id)
-        {
+        public Task<User> GetByIdAsync(int id) {
             throw new NotImplementedException();
         }
     }

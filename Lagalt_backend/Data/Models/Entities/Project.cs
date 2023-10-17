@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Lagalt_backend.Data.Models.Entities
-{
-    public partial class Project
-    {
-        public Project()
-        {
+namespace Lagalt_backend.Data.Models.Entities {
+
+    /// <summary>
+    /// Defines an entity for a Project
+    /// </summary>
+    public partial class Project {
+        public Project() {
             CollaboratorApplications = new HashSet<CollaboratorApplication>();
             Skills = new HashSet<Skill>();
             Collaborators = new HashSet<User>();

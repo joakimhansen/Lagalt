@@ -29,11 +29,6 @@ namespace Lagalt_backend.Mappers {
                 .ForMember(projectDto => projectDto.NeededSkills, options => options
                     .MapFrom(project => project.Skills.Select(skill => skill.Name)));
 
-            CreateMap<Project, ProjectApplicationDTO>()
-                .ForMember(dto => dto.Applications, options => options
-                    .MapFrom(project => project.CollaboratorApplications));
-
-
             CreateMap<Project, ProjectsPutDTO>().ReverseMap();
 
             CreateMap<Project, ProjectUserDTO>().ReverseMap();

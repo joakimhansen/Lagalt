@@ -4,6 +4,10 @@ using Lagalt_backend.Data.DTOs.Skills;
 using Lagalt_backend.Data.DTOs.User;
 
 namespace Lagalt_backend.Data.DTOs.Projects {
+
+    /// <summary>
+    /// Used to get all projects
+    /// </summary>
     public class ProjectsListDTO {
         public int Id { get; set; }
         public string Title { get; set; } = null!;
@@ -13,9 +17,5 @@ namespace Lagalt_backend.Data.DTOs.Projects {
         public ICollection<CollaboratorDTO> Collaborators { get; set; } = new List<CollaboratorDTO>();
         public ICollection<ApplicationDTO> Applications { get; set; } = new List<ApplicationDTO>();
         public string[] NeededSkills { get; set; } = new string[] { };
-
-
-        //public string? Github_Url { get; set; }
-        //public CreatorDTO? Creator { get; set; }
     }
 }
