@@ -24,6 +24,11 @@ namespace Lagalt_backend.Controllers {
             return Ok(_mapper.Map<IEnumerable<UserDTO>>(await _service.GetAllAsync()));
         }*/
 
+        /// <summary>
+        /// Get a spesific user by username
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
         [HttpGet("{username}")]
         public async Task<ActionResult<UserDTO>> GetUser(string username) {
             try {
@@ -33,6 +38,12 @@ namespace Lagalt_backend.Controllers {
             }
         }
 
+        /// <summary>
+        /// Change an exsiting user by username (info, image-url, hidden)
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="User"></param>
+        /// <returns></returns>
         [HttpPut("{username}")]
         public async Task<IActionResult> PutUser(string username, UserPutDTO User) {
             if (username != User.Username) {
