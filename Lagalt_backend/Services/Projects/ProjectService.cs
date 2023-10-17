@@ -60,8 +60,7 @@ namespace Lagalt_backend.Services.Projects {
                 .Include(p => p.CollaboratorApplications)
                 .FirstAsync();
 
-            foreach (var application in project.CollaboratorApplications)
-            {
+            foreach (var application in project.CollaboratorApplications) {
                 _context.CollaboratorApplications.Remove(application);
             }
             project.Collaborators.Clear();

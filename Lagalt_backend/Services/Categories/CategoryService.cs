@@ -3,8 +3,11 @@ using Lagalt_backend.Data.Models;
 using Lagalt_backend.Data.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Lagalt_backend.Services.Categories
-{
+namespace Lagalt_backend.Services.Categories {
+
+    /// <summary>
+    /// Service to communicate with the database
+    /// </summary>
     public class CategoryService : ICategoryService {
 
         private readonly LagaltDbContext _context;
@@ -13,10 +16,20 @@ namespace Lagalt_backend.Services.Categories
             _context = context;
         }
 
+        /// <summary>
+        /// Fetch all the categories from the db-context
+        /// </summary>
+        /// <returns></returns>
         public async Task<ICollection<Category>> GetAllAsync() {
             return await _context.Categories.Include(c => c.Projects).ToListAsync();
         }
 
+        /// <summary>
+        /// Get a category by id from the db-context and save the changes
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="EntityNotFoundException"></exception>
         public async Task<Category> GetByIdAsync(int id) {
             if (!await CategoryExistsAsync(id)) {
                 throw new EntityNotFoundException(nameof(Category), id);

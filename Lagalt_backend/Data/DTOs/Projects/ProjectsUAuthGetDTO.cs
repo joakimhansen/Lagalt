@@ -2,15 +2,15 @@
 using Lagalt_backend.Data.Models.Entities;
 
 namespace Lagalt_backend.Data.DTOs.Projects {
-    public class ProjectsUAuthGetDTO {
 
+    /// <summary>
+    /// Used to get a project by id when not authenticated/logged in
+    /// </summary>
+    public class ProjectsUAuthGetDTO {
         public int Id { get; set; }
         public string Title { get; set; } = null!;
         public string? FullDescription { get; set; }
         public CollaboratorDTO Creator { get; set; }
         public int? Progress { get; set; }
-
-        //public string? Github_Url { get; set; }
-        //public CreatorDTO Creator { get; set; }
     }
 }

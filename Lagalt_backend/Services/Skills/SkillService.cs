@@ -3,10 +3,8 @@ using Lagalt_backend.Data.Models;
 using Lagalt_backend.Data.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Lagalt_backend.Services.Skills
-{
-    public class SkillService : ISkillService
-    {
+namespace Lagalt_backend.Services.Skills {
+    public class SkillService : ISkillService {
         /*private readonly LagaltDbContext _context;
         public SkillService(LagaltDbContext context)
         {
@@ -61,28 +59,23 @@ namespace Lagalt_backend.Services.Skills
             _context.Skills.Remove(SkillToDelete);
             await _context.SaveChangesAsync();
         }*/
-        public Task<Skill> AddAsync(Skill obj)
-        {
+        public Task<Skill> AddAsync(Skill obj) {
             throw new NotImplementedException();
         }
 
-        public Task DeleteByIdAsync(int id)
-        {
+        public Task DeleteByIdAsync(int id) {
             throw new NotImplementedException();
         }
 
-        public Task<ICollection<Skill>> GetAllAsync()
-        {
+        public Task<ICollection<Skill>> GetAllAsync() {
             throw new NotImplementedException();
         }
 
-        public Task<Skill> GetByIdAsync(int id)
-        {
+        public Task<Skill> GetByIdAsync(int id) {
             throw new NotImplementedException();
         }
 
-        public Task<Skill> UpdateAsync(Skill obj)
-        {
+        public Task<Skill> UpdateAsync(Skill obj) {
             throw new NotImplementedException();
         }
     }

@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Lagalt_backend.Data.Models.Entities
-{
-    public partial class Skill
-    {
-        public Skill()
-        {
+namespace Lagalt_backend.Data.Models.Entities {
+
+    /// <summary>
+    /// Defines an entity for a Skill
+    /// </summary>
+    public partial class Skill {
+        public Skill() {
             Projects = new HashSet<Project>();
             Usernames = new HashSet<User>();
         }

@@ -19,14 +19,6 @@ namespace Lagalt_backend.Data.Models {
         public virtual DbSet<Skill> Skills { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
 
-        /* protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-         {
-             if (!optionsBuilder.IsConfigured)
-             {
-                 optionsBuilder.UseSqlServer("Name=ConnectionStrings:LagaltTestDb");
-             }
-         }*/
-
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             modelBuilder.Entity<Category>(entity => {
                 entity.ToTable("Category");

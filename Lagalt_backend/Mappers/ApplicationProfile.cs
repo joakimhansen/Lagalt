@@ -8,7 +8,6 @@ namespace Lagalt_backend.Mappers {
         public ApplicationProfile() {
             CreateMap<CollaboratorApplication, ApplicationDTO>().ReverseMap();
             CreateMap<CollaboratorApplication, ApplicationPostDTO>().ReverseMap();
-            CreateMap<CollaboratorApplication, ApplicationDeleteDTO>().ReverseMap();
         }
     }
 }

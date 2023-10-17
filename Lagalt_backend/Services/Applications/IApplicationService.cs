@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Lagalt_backend.Services.Applications {
     public interface IApplicationService : ICrudService<CollaboratorApplication, int> {
-
         Task AcceptApplication(int id);
-        Task<CollaboratorApplication> CreateApplication(CollaboratorApplication application);
     }
 }
