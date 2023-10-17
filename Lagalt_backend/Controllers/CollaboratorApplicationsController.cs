@@ -30,32 +30,6 @@ namespace Lagalt_backend.Controllers {
         }
 
         /// <summary>
-        /// Get all the collaborator-applications
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<ApplicationDTO>>> GetCollaboratorApplications() {
-            return Ok(_mapper
-                .Map<IEnumerable<ApplicationDTO>>(
-                await _service.GetAllAsync()));
-        }
-
-        /// <summary>
-        /// Get a spesific collaboration-application by id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpGet("{id}")]
-        public async Task<ActionResult<CollaboratorApplication>> GetCollaboratorApplication(int id) {
-            try {
-                var application = await _service.GetByIdAsync(id);
-                return _mapper.Map<CollaboratorApplication>(application);
-            } catch (EntityNotFoundException ex) {
-                return NotFound(ex.Message);
-            }
-        }
-
-        /// <summary>
         /// Post a new collaboration-application
         /// </summary>
         /// <param name="application"></param>
