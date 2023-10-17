@@ -1,4 +1,5 @@
-﻿using Lagalt_backend.Data.Exceptions;
+﻿using Lagalt_backend.Data.DTOs.Projects;
+using Lagalt_backend.Data.Exceptions;
 using Lagalt_backend.Data.Models;
 using Lagalt_backend.Data.Models.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -33,20 +34,21 @@ namespace Lagalt_backend.Services.Projects {
                 .Include(p => p.Skills)
                 .FirstAsync();
         }
-        public async Task<Project> UpdateAsync(Project UpdatedProject) {
-            if (!await ProjectExistsAsync(UpdatedProject.Id)) {
-                throw new EntityNotFoundException(nameof(Project), UpdatedProject.Id);
+        public async Task<Project> UpdateAsync(int id, ProjectsPutDTO UpdatedProject) {
+            if (!await ProjectExistsAsync(id)) {
+                throw new EntityNotFoundException(nameof(Project), id);
             }
 
             var project = await _context.Projects
-                .Where(p => p.Id == UpdatedProject.Id)
+                .Where(p => p.Id == id)
                 .FirstAsync();
             project.FullDescription = UpdatedProject.FullDescription;
             project.Progress = UpdatedProject.Progress;
 
             _context.Entry(project).State = EntityState.Modified;
             _context.SaveChanges();
-            return UpdatedProject;
+
+            return project;
         }
 
         public async Task DeleteByIdAsync(int id) {

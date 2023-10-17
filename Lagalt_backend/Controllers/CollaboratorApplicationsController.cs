@@ -47,7 +47,7 @@ namespace Lagalt_backend.Controllers {
         }
 
         [HttpPost]
-        public async Task<ActionResult<ApplicationDTO>> CreateApplication(ApplicationPostDTO application) {
+        public async Task<ActionResult<ApplicationDTO>> CreateApplication([FromForm] ApplicationPostDTO application) {
             var newApplication = await _service.CreateApplication(_mapper.Map<CollaboratorApplication>(application));
             return CreatedAtAction("CreateApplication",
                 new { id = newApplication.Id },
@@ -75,34 +75,5 @@ namespace Lagalt_backend.Controllers {
                 return NotFound(ex.Message);
             }
         }
-
-
-
-
-
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutCollaboratorApplication(int id, CollaboratorApplication collaboratorApplication) {
-        //    if (id != collaboratorApplication.Id) {
-        //        return BadRequest();
-        //    }
-
-        //    _context.Entry(collaboratorApplication).State = EntityState.Modified;
-
-        //    try {
-        //        await _context.SaveChangesAsync();
-        //    } catch (DbUpdateConcurrencyException) {
-        //        if (!CollaboratorApplicationExists(id)) {
-        //            return NotFound();
-        //        } else {
-        //            throw;
-        //        }
-        //    }
-
-        //    return NoContent();
-        //}
-
-        //private bool CollaboratorApplicationExists(int id) {
-        //    return (_context.CollaboratorApplications?.Any(e => e.Id == id)).GetValueOrDefault();
-        //}
     }
 }

@@ -57,11 +57,11 @@ namespace Lagalt_backend.Controllers {
 
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProject(int id, [FromForm] ProjectsPutDTO project) {
-            if (id != project.Id) {
+            /*if (id != project.Id) {
                 return BadRequest();
-            }
+            }*/
             try {
-                await _service.UpdateAsync(_mapper.Map<Project>(project));
+                await _service.UpdateAsync(id, _mapper.Map<Project>(project));
             } catch (EntityNotFoundException ex) {
                 return NotFound(ex.Message);
             }
