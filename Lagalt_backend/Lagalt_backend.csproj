@@ -8,6 +8,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Upload\**" />
+	  <Content Remove="Upload\**" />
+	  <EmbeddedResource Remove="Upload\**" />
+	  <None Remove="Upload\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.22">
 			<PrivateAssets>all</PrivateAssets>
@@ -25,7 +32,6 @@
 
 	<ItemGroup>
 		<Folder Include="Data\Models\Entities\" />
-		<Folder Include="Upload\Files\" />
 	</ItemGroup>
 
 </Project>

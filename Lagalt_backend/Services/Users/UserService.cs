@@ -11,6 +11,10 @@ namespace Lagalt_backend.Services.Users {
             _context = context;
         }
 
+        /// <summary>
+        /// Get all the users from the db-context
+        /// </summary>
+        /// <returns></returns>
         public async Task<ICollection<User>> GetAllAsync() {
             List<User> users = await _context.Users
                                     .Include(user => user.Skills)
@@ -19,6 +23,12 @@ namespace Lagalt_backend.Services.Users {
             return users;
         }
 
+        /// <summary>
+        /// Get a spesific user by id
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        /// <exception cref="UserNotFoundException"></exception>
         public async Task<User> GetByIdAsync(string username) {
 
             if (!await _context.Users.AnyAsync(user => user.Username == username))
@@ -37,21 +47,13 @@ namespace Lagalt_backend.Services.Users {
 
             return user;
         }
-        /*
-        
 
-        public async Task DeleteByIdAsync(int id)
-        {
-            //Throws EntityNotFoundException if it doesn't exist
-            var UserToDelete = await GetByIdAsync(id);
-
-            UserToDelete.Skills.Clear();
-            UserToDelete.Projects.Clear();
-
-            _context.Users.Remove(UserToDelete);
-            await _context.SaveChangesAsync();
-        }*/
-
+        /// <summary>
+        /// Update an existing user
+        /// </summary>
+        /// <param name="updatedUser"></param>
+        /// <returns></returns>
+        /// <exception cref="UserNotFoundException"></exception>
         public async Task<User> UpdateAsync(User updatedUser) {
             if (!await _context.Users.AnyAsync(user => user.Username == updatedUser.Username))
                 throw new UserNotFoundException(updatedUser.Username);
@@ -77,5 +79,26 @@ namespace Lagalt_backend.Services.Users {
         public Task<User> GetByIdAsync(int id) {
             throw new NotImplementedException();
         }
+
+        /*
+        public async Task<User> AddAsync(User newUser)
+        {
+            await _context.Users.AddAsync(newUser);
+            await _context.SaveChangesAsync();
+
+            return newUser;
+        }
+
+        public async Task DeleteByIdAsync(int id)
+        {
+            //Throws EntityNotFoundException if it doesn't exist
+            var UserToDelete = await GetByIdAsync(id);
+
+            UserToDelete.Skills.Clear();
+            UserToDelete.Projects.Clear();
+
+            _context.Users.Remove(UserToDelete);
+            await _context.SaveChangesAsync();
+        }*/
     }
 }

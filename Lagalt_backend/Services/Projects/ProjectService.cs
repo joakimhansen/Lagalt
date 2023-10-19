@@ -13,6 +13,10 @@ namespace Lagalt_backend.Services.Projects {
             _context = context;
         }
 
+        /// <summary>
+        /// Get all the projects from the db-context
+        /// </summary>
+        /// <returns></returns>
         public async Task<ICollection<Project>> GetAllAsync() {
             return await _context.Projects
                 .Include(p => p.Creator)
@@ -23,6 +27,12 @@ namespace Lagalt_backend.Services.Projects {
                 .ToListAsync();
         }
 
+        /// <summary>
+        /// Get a spesific project by id from the db-context
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="EntityNotFoundException"></exception>
         public async Task<Project> GetByIdAsync(int id) {
             if (!await ProjectExistsAsync(id)) {
                 throw new EntityNotFoundException(nameof(Project), id);
@@ -34,6 +44,13 @@ namespace Lagalt_backend.Services.Projects {
                 .Include(p => p.Skills)
                 .FirstAsync();
         }
+
+        /// <summary>
+        /// Update an existing project
+        /// </summary>
+        /// <param name="UpdatedValues"></param>
+        /// <returns></returns>
+        /// <exception cref="EntityNotFoundException"></exception>
         public async Task<Project> UpdateAsync(Project UpdatedValues) {
             if (!await ProjectExistsAsync(UpdatedValues.Id)) {
                 throw new EntityNotFoundException(nameof(Project), UpdatedValues.Id);
@@ -51,6 +68,12 @@ namespace Lagalt_backend.Services.Projects {
             return project;
         }
 
+        /// <summary>
+        /// Delete an existing project by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="EntityNotFoundException"></exception>
         public async Task DeleteByIdAsync(int id) {
             if (!await ProjectExistsAsync(id)) {
                 throw new EntityNotFoundException(nameof(Project), id);
@@ -71,20 +94,15 @@ namespace Lagalt_backend.Services.Projects {
             await _context.SaveChangesAsync();
         }
 
-        /*public async Task<Project> AddAsync(Project obj)
-        {
-            await _context.Projects.AddAsync(obj);
-            await _context.SaveChangesAsync();
-            return obj;
-        }
-
-       
-
-        */
-
+        /// <summary>
+        /// Check if a project exist in the db-context
+        /// </summary>
+        /// <param name="projectId"></param>
+        /// <returns></returns>
         private Task<bool> ProjectExistsAsync(int projectId) {
             return _context.Projects.AnyAsync(p => p.Id == projectId);
         }
+
         public Task<Project> AddAsync(Project obj)
         {
             throw new NotImplementedException();

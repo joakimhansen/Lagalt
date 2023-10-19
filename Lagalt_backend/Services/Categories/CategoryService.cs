@@ -39,12 +39,23 @@ namespace Lagalt_backend.Services.Categories {
                 .FirstAsync();
         }
 
+        /// <summary>
+        /// Add a new category to the db-context and save the changes
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public async Task<Category> AddAsync(Category obj) {
             await _context.Categories.AddAsync(obj);
             await _context.SaveChangesAsync();
             return obj;
         }
 
+        /// <summary>
+        /// Change an existing category
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        /// <exception cref="EntityNotFoundException"></exception>
         public async Task<Category> UpdateAsync(Category obj) {
             if (!await CategoryExistsAsync(obj.Id)) {
                 throw new EntityNotFoundException(nameof(Category), obj.Id);
@@ -55,6 +66,12 @@ namespace Lagalt_backend.Services.Categories {
             return obj;
         }
 
+        /// <summary>
+        /// Delete an exsisting category by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="EntityNotFoundException"></exception>
         public async Task DeleteByIdAsync(int id) {
             if (!await CategoryExistsAsync(id)) {
                 throw new EntityNotFoundException(nameof(Category), id);
@@ -69,6 +86,11 @@ namespace Lagalt_backend.Services.Categories {
             _context.SaveChanges();
         }
 
+        /// <summary>
+        /// Check if a category exist in the db-context
+        /// </summary>
+        /// <param name="categoryId"></param>
+        /// <returns></returns>
         private Task<bool> CategoryExistsAsync(int categoryId) {
             return _context.Categories.AnyAsync(c => c.Id == categoryId);
         }
