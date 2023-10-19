@@ -11,7 +11,7 @@ The swagger-documentation can be found here:
 [Lagalt-Web-API](https://lagalt-docker.azurewebsites.net/swagger/index.html)
 
 ## Contributors
-* [mUttisrud (@mUttisrud)](https://github.com/mUttisrud)
-* [joakimhansen (@joakimhansen)](https://github.com/joakimhansen)
-* [Siljeesl (@Siljeesl)](https://github.com/Siljeesl)
-* [silje-denise (@silje-denise)](https://github.com/silje-denise)
+* [Magnus Uttisrud (@mUttisrud)](https://github.com/mUttisrud)
+* [Joakim Hansen (@joakimhansen)](https://github.com/joakimhansen)
+* [Silje Slettebakk (@Siljeesl)](https://github.com/Siljeesl)
+* [Silje Denise Risnes (@silje-denise)](https://github.com/silje-denise)
