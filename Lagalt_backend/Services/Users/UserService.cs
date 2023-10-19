@@ -20,6 +20,10 @@ namespace Lagalt_backend.Services.Users {
         }
 
         public async Task<User> GetByIdAsync(string username) {
+
+            if (!await _context.Users.AnyAsync(user => user.Username == username))
+                throw new UserNotFoundException(username);
+
             User user = await _context.Users
                             .Where(user => user.Username == username)
                             .Include(user => user.Skills)
@@ -28,19 +32,13 @@ namespace Lagalt_backend.Services.Users {
                             .Include(user => user.ProjectsCollaborator)
                             .FirstAsync();
 
-            if (user is null)
-                throw new UserNotFoundException(username);
+           /* if (user is null)
+                throw new UserNotFoundException(username);*/
 
             return user;
         }
         /*
-        public async Task<User> AddAsync(User newUser)
-        {
-            await _context.Users.AddAsync(newUser);
-            await _context.SaveChangesAsync();
-
-            return newUser;
-        }
+        
 
         public async Task DeleteByIdAsync(int id)
         {
@@ -63,8 +61,12 @@ namespace Lagalt_backend.Services.Users {
 
             return updatedUser;
         }
-        public Task<User> AddAsync(User obj) {
-            throw new NotImplementedException();
+        public async Task<User> AddAsync(User newUser)
+        {
+            await _context.Users.AddAsync(newUser);
+            await _context.SaveChangesAsync();
+
+            return newUser;
         }
 
         public Task DeleteByIdAsync(string username) {

@@ -25,7 +25,7 @@ namespace Lagalt_backend.Controllers {
         }*/
 
         /// <summary>
-        /// Get a spesific user by username
+        /// Get a spesific user by username. If user doesn't exist, create a user with that username.
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
@@ -33,8 +33,9 @@ namespace Lagalt_backend.Controllers {
         public async Task<ActionResult<UserDTO>> GetUser(string username) {
             try {
                 return Ok(_mapper.Map<UserDTO>(await _service.GetByIdAsync(username)));
-            } catch (EntityNotFoundException ex) {
-                return NotFound(ex.Message);
+            } catch (UserNotFoundException ex) {
+                return Ok(_mapper.Map<UserDTO>(await _service.AddAsync(new User {Username = username})));
+                //return NotFound(ex.Message);
             }
         }
 

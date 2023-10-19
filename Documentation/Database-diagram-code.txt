@@ -1,0 +1,70 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+Table Project {
+  Id int [primary key]
+  Title nvarchar(40)
+  Short_Description nvarchar(250)
+  Full_Description nvarchar(600)
+  Progress int
+  Github_Url nvarchar(100)
+  Creator_Name nvarchar(25)
+  Category_Id int
+}
+
+Table User {
+  Username nvarchar(25) [primary key]
+  Info nvarchar(1000)
+  ImageUrl nvarchar(300)
+  Hidden bit
+}
+
+Table Skill {
+  Id int [primary key]
+  Name nvarchar(25)
+}
+
+Table CollaboratorApplication {
+  Id int [primary key]
+  Content nvarchar(200)
+  User nvarchar (25)
+  Project int
+}
+Table Category {
+  Id int [primary key]
+  Name nvarchar(25)
+}
+Table ProjectCollaboratorLink {
+  Username nvarchar(25) [primary key]
+  Project_Id int [primary key]
+}
+
+Table ProjectSkillLink {
+  Skill_Id int [primary key]
+  Project_Id int [primary key]
+}
+
+Table UserSkillLink {
+  Username nvarchar(25) [primary key]
+  Skill_Id int [primary key]
+}
+
+// CollaboratorApplication Foreign Keys
+Ref: CollaboratorApplication.User - User.Username
+Ref: CollaboratorApplication.Project - Project.Id
+
+// Projects Foreign Keys
+Ref: Project.Category_Id > Category.Id // many-to-one
+Ref: Project.Creator_Name - User.Username
+
+//ProjectCollaboratorLink Foreign Keys
+Ref: ProjectCollaboratorLink.Project_Id - Project.Id
+Ref: ProjectCollaboratorLink.Username - User.Username
+
+//ProjectSkillLink Foregin Keys
+Ref: ProjectSkillLink.Project_Id - Project.Id
+Ref: ProjectSkillLink.Skill_Id - Skill.Id
+
+//UserSkillLink Foreign Keys
+Ref: UserSkillLink.Username - User.Username
+Ref: UserSkillLink.Skill_Id - Skill.Id
+
