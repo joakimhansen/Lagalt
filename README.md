@@ -7,7 +7,7 @@ The frontend of the application is hosted on Vercel:
 [Lagalt-Frontend](https://lagalt-frontend-plum.vercel.app/)
 
 ### Backend
-The Web-API is hosted on Azure:
+The swagger-documentation can be found here:
 [Lagalt-Web-API](https://lagalt-docker.azurewebsites.net/swagger/index.html)
 
 ## Contributors
