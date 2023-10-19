@@ -30,6 +30,8 @@ namespace Lagalt_backend {
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             builder.Services.AddEndpointsApiExplorer();
+
+            // Add swagger-documentation
             builder.Services.AddSwaggerGen(options => {
                 options.SwaggerDoc("v1", new OpenApiInfo {
                     Version = "v1",
@@ -55,7 +57,7 @@ namespace Lagalt_backend {
             //if (app.Environment.IsDevelopment()) {
             app.UseSwagger();
             app.UseSwaggerUI();
-            //s}
+            //}
 
             app.UseHttpsRedirection();
             app.UseAuthorization();
