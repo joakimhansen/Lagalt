@@ -29,6 +29,10 @@ namespace Lagalt_backend.Controllers {
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Get all the projects
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProjectsListDTO>>> GetProjects() {
             return Ok(_mapper
@@ -36,6 +40,11 @@ namespace Lagalt_backend.Controllers {
                 await _service.GetAllAsync()));
         }
 
+        /// <summary>
+        /// Get a spesific project by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}/u")]
         public async Task<ActionResult<ProjectsUAuthGetDTO>> GetProject(int id) {
             try {
@@ -45,6 +54,12 @@ namespace Lagalt_backend.Controllers {
                 return NotFound(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Get a spesific project by id when authenticated/logged in
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}/a")]
         public async Task<ActionResult<ProjectsAuthGetDTO>> GetProjectA(int id) {
             try {
@@ -55,6 +70,12 @@ namespace Lagalt_backend.Controllers {
             }
         }
 
+        /// <summary>
+        /// Change a project by id (full-description and progress)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="project"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProject(int id, [FromForm] ProjectsPutDTO UpdatedValues) {
             if (id != UpdatedValues.Id)
@@ -72,6 +93,11 @@ namespace Lagalt_backend.Controllers {
             }
         }
 
+        /// <summary>
+        /// Delete a project by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProject(int id) {
             try {
@@ -82,28 +108,5 @@ namespace Lagalt_backend.Controllers {
             }
         }
 
-        /*
-                [HttpPost]
-                public async Task<ActionResult<ProjectsGetDTO>> PostProject(ProjectsPostDTO project) {
-                    var newProject = await _service.AddAsync(_mapper.Map<Project>(project));
-                    return CreatedAtAction("PostProject",
-                        new { id = newProject.Id },
-                        _mapper.Map<ProjectsGetDTO>(newProject));
-                }
-
-                [HttpPut("{id}")]
-                public async Task<IActionResult> PutProject(int id, ProjectsPutDTO project) {
-                    if (id != project.Id) {
-                        return BadRequest();
-                    }
-                    try {
-                        await _service.UpdateAsync(_mapper.Map<Project>(project));
-                    } catch (EntityNotFoundException ex) {
-                        return NotFound(ex.Message);
-                    }
-                    return NoContent();
-                }
-
-        */
     }
 }

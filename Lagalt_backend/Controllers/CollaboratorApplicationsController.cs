@@ -29,31 +29,24 @@ namespace Lagalt_backend.Controllers {
             _mapper = mapper;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<ApplicationDTO>>> GetCollaboratorApplications() {
-            return Ok(_mapper
-                .Map<IEnumerable<ApplicationDTO>>(
-                await _service.GetAllAsync()));
-        }
-
-        [HttpGet("{id}")]
-        public async Task<ActionResult<CollaboratorApplication>> GetCollaboratorApplication(int id) {
-            try {
-                var application = await _service.GetByIdAsync(id);
-                return _mapper.Map<CollaboratorApplication>(application);
-            } catch (EntityNotFoundException ex) {
-                return NotFound(ex.Message);
-            }
-        }
-
+        /// <summary>
+        /// Post a new collaboration-application
+        /// </summary>
+        /// <param name="application"></param>
+        /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult<ApplicationDTO>> CreateApplication([FromForm] ApplicationPostDTO application) {
-            var newApplication = await _service.CreateApplication(_mapper.Map<CollaboratorApplication>(application));
+        public async Task<ActionResult<ApplicationDTO>> AddApplication([FromForm] ApplicationPostDTO application) {
+            var newApplication = await _service.AddAsync(_mapper.Map<CollaboratorApplication>(application));
             return CreatedAtAction("CreateApplication",
                 new { id = newApplication.Id },
                 _mapper.Map<ApplicationPostDTO>(newApplication));
         }
 
+        /// <summary>
+        /// Accept a new application from a user
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost("Accept/{id}")]
         public async Task<IActionResult> AcceptApplication(int id) {
             try {
@@ -65,7 +58,11 @@ namespace Lagalt_backend.Controllers {
         }
 
 
-
+        /// <summary>
+        /// Delete a collaboration-application from a project
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCollaboratorApplication(int id) {
             try {
@@ -75,5 +72,6 @@ namespace Lagalt_backend.Controllers {
                 return NotFound(ex.Message);
             }
         }
+
     }
 }
