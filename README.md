@@ -8,6 +8,7 @@ Before you begin, ensure that you have the following prerequisites installed:
 
 - [Visual Studio](https://visualstudio.microsoft.com/downloads/)
 - [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
+- [SQL Server Management Studio (SSMS)]([https://www.microsoft.com/en-us/sql-server/sql-server-downloads](https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16#download-ssms)
 
 ### Installation Steps
 
