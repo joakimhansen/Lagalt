@@ -1,8 +1,6 @@
 # Lagalt
 
-## Installation instructions
-
-## Setup and run the WEB-API on localhost
+## Setting Up and Running the Web API Locally
 These instructions will guide you through the process of setting up and running the web API locally on your computer. The web API connects to a database, and in this guide, we assume you're using Visual Studio and Microsoft SQL Server Management Studio. To run the application locally, you'll need to set up your own database using provided SQL scripts.
 
 ### Prerequisites
