@@ -89,11 +89,17 @@ namespace Lagalt_backend.Services.Applications {
 
             var project = await _context.Projects
                 .Where(p => p.Id == application.Project)
+                .Include(p => p.Collaborators)
                 .FirstAsync();
 
             var user = await _context.Users
                 .Where(u => u.Username == application.User)
                 .FirstAsync();
+
+            if(project.Collaborators.Contains(user))
+            {
+                throw new CollaboratorExistsException(user.Username);
+            }
 
             project.Collaborators.Add(user);
             await DeleteByIdAsync(id);

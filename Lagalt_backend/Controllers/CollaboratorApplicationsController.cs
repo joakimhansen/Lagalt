@@ -54,6 +54,9 @@ namespace Lagalt_backend.Controllers {
                 return Ok();
             } catch (EntityNotFoundException ex) {
                 return NotFound(ex.Message);
+            } catch (CollaboratorExistsException ex)
+            {
+                return NotFound(ex.Message);
             }
         }
 

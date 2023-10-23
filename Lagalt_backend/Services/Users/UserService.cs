@@ -42,9 +42,6 @@ namespace Lagalt_backend.Services.Users {
                             .Include(user => user.ProjectsCollaborator)
                             .FirstAsync();
 
-           /* if (user is null)
-                throw new UserNotFoundException(username);*/
-
             return user;
         }
 

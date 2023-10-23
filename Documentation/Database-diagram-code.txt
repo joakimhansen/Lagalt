@@ -54,7 +54,7 @@ Ref: CollaboratorApplication.Project - Project.Id
 
 // Projects Foreign Keys
 Ref: Project.Category_Id > Category.Id // many-to-one
-Ref: Project.Creator_Name - User.Username
+Ref: Project.Creator_Name > User.Username
 
 //ProjectCollaboratorLink Foreign Keys
 Ref: ProjectCollaboratorLink.Project_Id - Project.Id
