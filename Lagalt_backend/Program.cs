@@ -36,11 +36,11 @@ namespace Lagalt_backend {
                 options.SwaggerDoc("v1", new OpenApiInfo {
                     Version = "v1",
                     Title = "LagaltAPI",
-                    Description = "An ASP.NET Core Web API handling calls between frontend and backend for lagalt",
+                    Description = "An ASP.NET Core Web API handling calls between frontend and backend for Lagalt\n\n- Magnus Uttisrud\n\n- Joakim Hansen\n\n- Silje Denise Risnes\n\n- Silje Slettebakk",
                     TermsOfService = new Uri("https://example.com/terms"),
                     Contact = new OpenApiContact {
                         Name = "Github Repository",
-                        Url = new Uri("https://github.com/joakimhansen/Lagalt")
+                        Url = new Uri("https://github.com/joakimhansen/Lagalt"),
                     },
                     License = new OpenApiLicense {
                         Name = "Example License",
