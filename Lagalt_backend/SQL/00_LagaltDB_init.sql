@@ -1,11 +1,14 @@
 
 
-USE [LagaltDB]
+
+--CREATE DATABASE [LagaltDB]
+
 
 CREATE TABLE [User](
-	[Id] int IDENTITY(1,1) PRIMARY KEY,
-	[Username] nvarchar(25)	NOT NULL,
-	[Info] nvarchar(1000)
+	[Username] nvarchar(25) PRIMARY KEY,
+	[Info] nvarchar(1000),
+	[Image_url] nvarchar(300),
+	[Hidden] bit NOT NULL DEFAULT 0
 );
 
 CREATE TABLE [Category](
@@ -16,20 +19,40 @@ CREATE TABLE [Category](
 CREATE TABLE [Project](
 	[Id] int IDENTITY(1,1) PRIMARY KEY,
 	[Title] nvarchar(40) NOT NULL,
-	[Short_Description] nvarchar(500),
-	[Full_Description] nvarchar(max),
+	[Short_Description] nvarchar(250),
+	[Full_Description] nvarchar(600),
+	[Github_Url] nvarchar(100),
+	[Progress] int DEFAULT 0,
 	[Category_Id] int FOREIGN KEY REFERENCES [Category]([Id]),
-	[Creator_Id] int FOREIGN KEY REFERENCES [User]([Id])
+	[Creator_Name] nvarchar(25) FOREIGN KEY REFERENCES [User]([Username]),
+	CHECK ([Progress] in (0,1,2,3)) 
 );
-
 CREATE TABLE [Skill](
 	[Id] int IDENTITY(1,1) PRIMARY KEY,
 	[Name] nvarchar(25) NOT NULL
 );
+CREATE TABLE [CollaboratorApplication](
+	[Id] int IDENTITY(1,1) PRIMARY KEY,
+	[Content] nvarchar (800) NOT NULL,
+	[User] nvarchar(25) FOREIGN KEY REFERENCES [User]([Username]),
+	[Project] int FOREIGN KEY REFERENCES [Project]([Id])
+);
 
 CREATE TABLE [UserSkillLink](
-[User_Id] int FOREIGN KEY REFERENCES [User]([Id]),
+[Username] nvarchar(25) FOREIGN KEY REFERENCES [User]([Username]),
 [Skill_Id] int FOREIGN KEY REFERENCES [Skill]([Id]),
-CONSTRAINT [UserSkillLink_Primary_Key] PRIMARY KEY([User_Id], [Skill_Id])
+CONSTRAINT [UserSkillLink_Primary_Key] PRIMARY KEY([Username], [Skill_Id])
+);
+
+CREATE TABLE [ProjectSkillLink](
+[Project_Id] int FOREIGN KEY REFERENCES [Project]([Id]),
+[Skill_Id] int FOREIGN KEY REFERENCES [Skill]([Id]),
+CONSTRAINT [ProjectSkillLink_Primary_Key] PRIMARY KEY([Project_Id], [Skill_Id])
+);
+
+CREATE TABLE [ProjectCollaboratorLink](
+[Project_Id] int FOREIGN KEY REFERENCES [Project]([Id]),
+[Username] nvarchar(25) FOREIGN KEY REFERENCES [User]([Username]),
+CONSTRAINT [ProjectCollaboratorLink_Primary_Key] PRIMARY KEY([Project_Id], [Username])
 );
 
