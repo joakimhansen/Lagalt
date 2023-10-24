@@ -14,6 +14,6 @@ namespace Lagalt_backend.Data.DTOs.User {
         public bool Hidden { get; set; }
         public ICollection<ProjectUserDTO> Projects { get; set; } = new List<ProjectUserDTO>();
         public string[] Skills { get; set; } = new string[] { };
-        public ICollection<ApplicationDTO> Applications { get; set; } = new List<ApplicationDTO>();
+        public ICollection<ApplicationAcceptDTO> Applications { get; set; } = new List<ApplicationAcceptDTO>();
     }
 }
